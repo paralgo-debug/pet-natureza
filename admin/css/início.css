@@ -1,0 +1,9 @@
+/* Editor da Página Inicial (carregado automaticamente pela seção "Página Inicial") */
+.check { display: flex !important; align-items: center; gap: .6rem; min-height: 44px; font-weight: 600; cursor: pointer; }
+.check input { width: 24px; height: 24px; flex: none; accent-color: #2b4c7e; }
+.lista-ed { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .75rem; }
+.item-ed { border: 1px solid var(--borda); border-radius: var(--raio); padding: .75rem; background: #f9fafb; }
+.item-ed .acoes { margin-top: .5rem; }
+.item-ed .campo:last-of-type { margin-bottom: .25rem; }
+.barra-fixa { display: flex; flex-wrap: wrap; gap: .5rem; padding: .75rem 0 0; }
+.sub { color: var(--suave); font-size: .9rem; margin: 0 0 1rem; }
