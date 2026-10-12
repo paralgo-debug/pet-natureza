@@ -1,9 +1,9 @@
+
 import { esc } from './util.js';
 
 export const SECOES = [
   { id: 'painel', rotulo: 'Painel', icone: '🏠', pronto: true, afeta: 'Visão geral' },
-  { id: 'inicio', rotulo: 'Página Inicial', icone: '📄', afeta: 'Página inicial',
-    resumo: 'Textos de boas-vindas, Sobre Nós, serviços, galeria, imagem principal, botões, diferenciais, contato e rodapé.' },
+  { id: 'inicio', rotulo: 'Página Inicial', icone: '📄', pronto: true, afeta: 'Página inicial' },
   { id: 'produtos', rotulo: 'Produtos', icone: '🛍️', afeta: 'Loja',
     resumo: 'Cadastro de produtos e categorias, imagens, estoque, promoções, destaques e histórico de ajustes.' },
   { id: 'entrega', rotulo: 'Entrega e Retirada', icone: '🚚', afeta: 'Loja',
