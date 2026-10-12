@@ -1,8 +1,10 @@
+ 
 import { supabase, configurado } from './supabase.js';
 import { $, $$, esc, toast, setStatusPub, traduzirErro } from './util.js';
 import { SECOES, viewPlaceholder, viewAjuda } from './secoes.js';
 import { FORMULARIOS, viewConfig } from './configuracoes.js';
 import { viewPainel } from './painel.js';
+import { viewInicio } from './inicio.js';
 
 const raiz = $('#raiz');
 const ctx = { user: null, perfil: null, ehAdmin: false, atualizarStatus };
@@ -170,7 +172,8 @@ async function rotear() {
   alvo.innerHTML = '<p class="carregando">Carregando…</p>';
   try {
     if (secao.id === 'painel') await viewPainel(alvo, ctx);
-    else if (FORMULARIOS[secao.id]) await viewConfig(alvo, ctx, secao.id);
+    else if (secao.id === 'inicio') await viewInicio(alvo, ctx);
+    else if (FORMULARIOS[secao.id] && !FORMULARIOS[secao.id].custom) await viewConfig(alvo, ctx, secao.id);
     else if (secao.id === 'ajuda') viewAjuda(alvo);
     else viewPlaceholder(alvo, secao);
   } catch (e) {
