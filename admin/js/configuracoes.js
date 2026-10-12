@@ -3,8 +3,12 @@ import {
   esc, toast, confirmar, setStatusPub, normalizarWhatsApp, formatarWhatsApp,
   formatarDataHora, traduzirErro,
 } from './util.js';
+import { PADRAO_EMPRESA, PADRAO_REDES, mesclar } from './padroes.js';
+
+const PADROES = { empresa: PADRAO_EMPRESA, redes: PADRAO_REDES };
 
 export const FORMULARIOS = {
+  inicio: { titulo: 'Página Inicial', custom: true },
   empresa: {
     titulo: 'Informações da Empresa',
     afeta: 'Todas as páginas públicas (cabeçalho, contato, rodapé e links de WhatsApp)',
@@ -32,6 +36,10 @@ export const FORMULARIOS = {
       { nome: 'facebook', rotulo: 'Facebook', tipo: 'text', max: 80, ajuda: 'Nome da página. Exemplo: Pet Natureza' },
       { nome: 'threads', rotulo: 'Threads', tipo: 'text', max: 60, ajuda: 'Exemplo: petnatureza' },
       { nome: 'tiktok', rotulo: 'TikTok', tipo: 'text', max: 60, ajuda: 'Exemplo: petnatureza' },
+      { nome: 'instagram_url', rotulo: 'Link do perfil no Instagram', tipo: 'text', max: 300, url: true, ajuda: 'Opcional. Cole o link completo, começando com https://. Sem o link, o nome aparece no site sem clique.' },
+      { nome: 'facebook_url', rotulo: 'Link da página no Facebook', tipo: 'text', max: 300, url: true, ajuda: 'Opcional. Link completo, começando com https://' },
+      { nome: 'threads_url', rotulo: 'Link do perfil no Threads', tipo: 'text', max: 300, url: true, ajuda: 'Opcional. Link completo, começando com https://' },
+      { nome: 'tiktok_url', rotulo: 'Link do perfil no TikTok', tipo: 'text', max: 300, url: true, ajuda: 'Opcional. Link completo, começando com https://' },
     ],
   },
 };
@@ -55,6 +63,7 @@ const PREVIAS = {
       <dt>Facebook</dt><dd>${esc(v.facebook) || '—'}</dd>
       <dt>Threads</dt><dd>${esc(v.threads) || '—'}</dd>
       <dt>TikTok</dt><dd>${esc(v.tiktok) || '—'}</dd>
+      <dt>Links dos perfis</dt><dd>${[v.instagram_url, v.facebook_url, v.threads_url, v.tiktok_url].filter(Boolean).map(esc).join('<br>') || 'Nenhum link informado'}</dd>
     </dl>`;
   },
 };
@@ -99,6 +108,7 @@ function validar(v, def) {
     const x = v[c.nome] || '';
     if (c.obrigatorio && !x) erros[c.nome] = 'Preencha este campo.';
     else if (c.tipo === 'email' && x && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x)) erros[c.nome] = 'Informe um e-mail válido.';
+    else if (c.url && x && !/^https:\/\/\S+$/.test(x)) erros[c.nome] = 'Informe o link completo, começando com https://';
     else if (c.nome === 'whatsapp' && x && !/^55\d{10,11}$/.test(x)) erros[c.nome] = 'Informe um WhatsApp válido com DDD. Exemplo: (98) 98440-2286.';
   }
   return erros;
@@ -131,7 +141,7 @@ export async function viewConfig(alvo, ctx, chave) {
   if (rasc.error) throw rasc.error;
 
   const temRascunho = !!rasc.data;
-  const inicial = rasc.data?.value ?? pub.data?.value ?? {};
+  const inicial = mesclar(PADROES[chave] || {}, rasc.data?.value ?? pub.data?.value ?? {});
   const desab = !ctx.ehAdmin;
   const chaveLocal = `pn-rascunho-local-${chave}`;
   const norm = (v) => JSON.stringify(def.campos.map((c) => String(v?.[c.nome] ?? '')));
