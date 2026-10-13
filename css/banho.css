@@ -1,0 +1,262 @@
+/* PET NATUREZA - Banho & Tosa - estilos da página pública.
+   Usa as variáveis de css/site.css (carregue site.css antes deste arquivo). */
+
+.bt-pagina [hidden] { display: none !important; }
+.bt-pagina { background: var(--creme); color: var(--texto); }
+.bt-pagina *, .bt-pagina *::before, .bt-pagina *::after { box-sizing: border-box; }
+
+.bt-pagina :focus-visible {
+  outline: 3px solid var(--petroleo);
+  outline-offset: 2px;
+}
+.bt-pagina .rodape :focus-visible,
+.bt-ajuda-fixa :focus-visible { outline-color: var(--amarelo); }
+
+/* Espaço para o cabeçalho fixo e para a barra de ajuda fixa */
+.bt-main {
+  padding-top: 96px;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
+}
+
+/* ---------- Abertura ---------- */
+.bt-hero { padding: 8px 0 20px; }
+.bt-hero h1 {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--petroleo);
+  margin: 0 0 8px;
+}
+.bt-hero p { margin: 0; color: var(--suave); font-size: 1.05rem; max-width: 60ch; }
+
+/* ---------- Cartões e passos ---------- */
+.bt-passos { display: grid; gap: 16px; }
+.bt-cartao {
+  background: #fff;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 20px 16px;
+  min-width: 0;
+}
+.bt-cartao h2 {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size: 1.25rem;
+  color: var(--petroleo);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bt-num {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--petroleo);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.bt-sub { color: var(--suave); margin: 0 0 12px; font-size: .95rem; }
+
+.bt-aviso {
+  background: var(--amarelo-claro);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 0 0 12px;
+  color: var(--texto);
+}
+.bt-erro-geral {
+  background: #FDECEA;
+  border: 2px solid #B3261E;
+  color: #7A1410;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.bt-carregando { color: var(--suave); padding: 12px 0; }
+
+/* ---------- Datas (chips com rolagem) ---------- */
+.bt-datas {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 4px 2px 10px;
+  margin: 0 -2px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.bt-data {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 68px; min-height: 76px;
+  border: 2px solid var(--agua-claro);
+  background: var(--agua-claro);
+  color: var(--texto);
+  border-radius: 16px;
+  padding: 8px 6px;
+  font: inherit;
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px;
+}
+.bt-data .bt-dia-sem { font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; }
+.bt-data .bt-dia-num { font-family: "Baloo 2", system-ui, sans-serif; font-size: 1.4rem; line-height: 1; font-weight: 700; }
+.bt-data .bt-dia-mes { font-size: .78rem; }
+.bt-data[aria-pressed="true"] { background: var(--petroleo); border-color: var(--petroleo); color: #fff; }
+.bt-data.tem-opcao::after {
+  content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amarelo);
+  box-shadow: 0 0 0 2px var(--petroleo);
+}
+
+/* ---------- Horários ---------- */
+.bt-horas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+}
+.bt-hora {
+  min-height: 56px;
+  border: 2px solid var(--agua-escuro);
+  background: #fff;
+  color: var(--agua-escuro);
+  border-radius: 14px;
+  font: inherit; font-weight: 800; font-size: 1.05rem;
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 6px;
+}
+.bt-hora small { font-weight: 700; font-size: .75rem; }
+.bt-hora[aria-pressed="true"] { background: var(--agua-escuro); color: #fff; }
+.bt-hora:disabled {
+  border-color: #C9D3D6; background: #EEF2F3; color: #5B6B70;
+  cursor: not-allowed; text-decoration: line-through;
+}
+.bt-hora:disabled small { text-decoration: none; }
+
+/* ---------- Suas opções ---------- */
+.bt-opcoes-lista { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.bt-opcao {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  background: var(--agua-claro);
+  border-radius: 14px;
+  padding: 8px 10px;
+}
+.bt-opcao-rotulo {
+  background: var(--petroleo); color: #fff;
+  border-radius: 999px; padding: 4px 10px; font-weight: 800; font-size: .85rem;
+}
+.bt-opcao-texto { flex: 1 1 140px; font-weight: 700; }
+.bt-opcao-acoes { display: flex; gap: 6px; }
+.bt-icone {
+  min-width: 44px; min-height: 44px;
+  border: 2px solid var(--petroleo); background: #fff; color: var(--petroleo);
+  border-radius: 12px; font: inherit; font-size: 1.1rem; cursor: pointer;
+}
+.bt-icone:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Campos ---------- */
+.bt-campo { margin: 0 0 14px; }
+.bt-campo label, .bt-grupo legend { display: block; font-weight: 800; margin-bottom: 6px; }
+.bt-campo .bt-dica { font-weight: 400; color: var(--suave); font-size: .9rem; }
+.bt-campo input[type="text"], .bt-campo input[type="tel"], .bt-campo input[type="number"],
+.bt-campo textarea, .bt-campo select {
+  width: 100%; min-height: 48px;
+  border: 2px solid #9FB4BB; border-radius: 14px;
+  padding: 10px 12px; font: inherit; color: var(--texto); background: #fff;
+}
+.bt-campo textarea { min-height: 96px; resize: vertical; }
+.bt-campo [aria-invalid="true"] { border-color: #B3261E; }
+.bt-erro { color: #B3261E; font-weight: 700; font-size: .92rem; margin: 6px 0 0; }
+.bt-grade-2 { display: grid; gap: 0 12px; }
+
+.bt-grupo { border: 0; padding: 0; margin: 0 0 14px; min-width: 0; }
+.bt-grupo legend { padding: 0; }
+
+/* Cartões de rádio: <label class="bt-radio"><input type="radio"><span>Texto</span></label> */
+.bt-radios { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+.bt-radio { position: relative; display: block; }
+.bt-radio input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.bt-radio span {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  min-height: 48px; padding: 8px 10px;
+  border: 2px solid #9FB4BB; border-radius: 14px; background: #fff; font-weight: 700;
+}
+.bt-radio input:checked + span { background: var(--petroleo); border-color: var(--petroleo); color: #fff; }
+.bt-radio input:focus-visible + span { outline: 3px solid var(--petroleo); outline-offset: 2px; }
+
+/* Caixas de marcar: <label class="bt-check"><input type="checkbox"><span>Texto</span></label> */
+.bt-checks { display: grid; gap: 8px; }
+.bt-check {
+  display: flex; align-items: center; gap: 12px;
+  min-height: 52px; padding: 8px 12px;
+  border: 2px solid #9FB4BB; border-radius: 14px; background: #fff; cursor: pointer;
+  font-weight: 700;
+}
+.bt-check input { width: 24px; height: 24px; flex: 0 0 auto; accent-color: var(--agua-escuro); }
+.bt-check:has(input:checked) { border-color: var(--agua-escuro); background: var(--agua-claro); }
+
+/* ---------- Foto ---------- */
+.bt-foto-previa { margin: 12px 0 0; }
+.bt-foto-previa img { display: block; max-width: 100%; max-height: 260px; border-radius: 14px; }
+.bt-foto-acoes { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+/* ---------- Valor aproximado ---------- */
+.bt-valor { background: var(--agua-claro); }
+.bt-valor-total {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size: 2rem; line-height: 1.1; color: var(--petroleo); margin: 0 0 6px;
+}
+.bt-valor-itens { list-style: none; margin: 8px 0; padding: 0; }
+.bt-valor-itens li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dashed #9FB4BB; }
+.bt-valor details summary { cursor: pointer; font-weight: 800; min-height: 44px; display: flex; align-items: center; }
+.bt-valor-aviso { margin: 8px 0 0; font-size: .92rem; color: var(--suave); }
+
+/* ---------- Consentimento e botões ---------- */
+.bt-consent { display: flex; gap: 12px; align-items: flex-start; }
+.bt-consent input { width: 24px; height: 24px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--agua-escuro); }
+.bt-consent a { color: var(--petroleo); font-weight: 800; }
+.bt-botoes { display: grid; gap: 10px; margin-top: 16px; }
+.bt-botoes .btn { width: 100%; min-height: 52px; justify-content: center; }
+.bt-pagina .btn:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Campo-armadilha: fora da tela, invisível para pessoas */
+.bt-armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---------- Revisão e sucesso ---------- */
+.bt-resumo { margin: 0; display: grid; gap: 10px; }
+.bt-resumo div { border-bottom: 1px solid #E1E9EB; padding-bottom: 8px; }
+.bt-resumo dt { font-weight: 800; color: var(--petroleo); }
+.bt-resumo dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+.bt-sucesso h2 { font-size: 1.4rem; }
+.bt-protocolo {
+  display: inline-block; background: var(--amarelo); color: var(--texto);
+  font-family: "Baloo 2", system-ui, sans-serif; font-size: 1.4rem; font-weight: 700;
+  padding: 6px 16px; border-radius: 999px; margin: 4px 0 12px;
+}
+
+/* ---------- Barra fixa de ajuda ---------- */
+.bt-ajuda-fixa {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  background: var(--petroleo-escuro); color: #fff; text-align: center;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+}
+.bt-ajuda-fixa a {
+  color: #fff; font-weight: 800; text-decoration: underline;
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+
+/* ---------- Telas maiores ---------- */
+@media (min-width: 640px) {
+  .bt-cartao { padding: 24px; }
+  .bt-grade-2 { grid-template-columns: 1fr 1fr; }
+  .bt-botoes { grid-template-columns: auto auto; justify-content: start; }
+  .bt-botoes .btn { width: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt-pagina *, .bt-pagina *::before, .bt-pagina *::after {
+    animation: none !important; transition: none !important; scroll-behavior: auto !important;
+  }
+  }
