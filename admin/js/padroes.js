@@ -14,7 +14,7 @@ export const MODULOS = {
     zap: 'Olá! Gostaria de ver os produtos do Pet Natureza.',
   },
   banho: {
-    href: 'banho-e-tosa/', pronto: false,
+    href: 'banho-e-tosa/', pronto: true,
     aviso: 'Agendamento online em breve',
     zap: 'Olá! Gostaria de agendar Banho & Tosa para o meu pet.',
   },
@@ -117,4 +117,4 @@ export function mesclar(padrao, salvo) {
   const r = { ...padrao };
   for (const k of Object.keys(salvo)) r[k] = k in padrao ? mesclar(padrao[k], salvo[k]) : salvo[k];
   return r;
-}
+                                                                   }
