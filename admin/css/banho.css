@@ -1,0 +1,75 @@
+/* PET NATUREZA - Banho & Tosa - painel (visual neutro) */
+
+.bt-abas { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.bt-aba {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px;
+  border-radius: 10px; border: 1px solid #C5CED6; background: #fff; color: #2B3A47;
+  text-decoration: none; font-weight: 700;
+}
+.bt-aba[aria-current="page"] { background: #2B3A47; border-color: #2B3A47; color: #fff; }
+.bt-aba:focus-visible, .bt-card summary:focus-visible { outline: 3px solid #2F6FDE; outline-offset: 2px; }
+
+/* Filtros */
+.bt-filtros { display: grid; gap: 10px; margin-bottom: 12px; }
+.bt-filtros .campo { margin: 0; }
+.bt-contagem { margin: 0 0 12px; color: #52606D; }
+
+/* Lista de cartões */
+.bt-lista { display: grid; gap: 10px; }
+.bt-card { padding: 0; }
+.bt-card > summary {
+  display: grid; gap: 4px; padding: 12px 14px; cursor: pointer; min-height: 44px; list-style: none;
+}
+.bt-card > summary::-webkit-details-marker { display: none; }
+.bt-sum-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bt-prot { font-weight: 800; }
+.bt-linha { overflow-wrap: anywhere; }
+.bt-corpo { padding: 4px 14px 16px; border-top: 1px solid #E1E6EB; }
+.bt-bloco { margin-top: 16px; }
+.bt-bloco h3 { font-size: 1rem; margin: 0 0 8px; }
+
+/* Selos de status */
+.bt-st { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .85rem; font-weight: 800; }
+.st-novo { background: #E3EEFB; color: #0B3A6F; }
+.st-contato { background: #FFF3CD; color: #5C4400; }
+.st-confirmado { background: #DDF3E4; color: #14532D; }
+.st-cancelado { background: #F8DEDC; color: #7A1410; }
+.st-realizado { background: #E7E7F7; color: #2F2F6B; }
+
+/* Etiquetas e alertas */
+.bt-tag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: .8rem; font-weight: 800; }
+.bt-tag-perigo { background: #B3261E; color: #fff; }
+.bt-tag-atencao { background: #8A5A00; color: #fff; }
+.bt-alerta { border-radius: 10px; padding: 10px 12px; margin: 8px 0; font-weight: 700; overflow-wrap: anywhere; }
+.bt-alerta-perigo { background: #FDECEA; border: 2px solid #B3261E; color: #7A1410; }
+.bt-alerta-atencao { background: #FFF3CD; border: 2px solid #8A5A00; color: #4A3000; }
+
+/* Dados em lista */
+.bt-dl { display: grid; gap: 6px; margin: 0; }
+.bt-dl div { display: flex; gap: 8px; flex-wrap: wrap; }
+.bt-dl dt { font-weight: 800; }
+.bt-dl dd { margin: 0; overflow-wrap: anywhere; }
+.bt-ul { margin: 0; padding-left: 20px; }
+.bt-total { font-size: 1.4rem; font-weight: 800; margin: 0 0 6px; }
+.bt-itens { list-style: none; margin: 0; padding: 0; }
+.bt-itens li { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border-bottom: 1px dashed #C5CED6; }
+
+/* Status e confirmação */
+.bt-confirmar { border: 1px solid #C5CED6; border-radius: 10px; padding: 10px 12px; margin: 10px 0; }
+.bt-confirmar legend { font-weight: 800; padding: 0 4px; }
+.bt-confirmar label { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.bt-confirmar input[type="radio"] { width: 22px; height: 22px; flex: 0 0 auto; }
+.bt-confirmar select { min-height: 44px; max-width: 100%; }
+
+/* Notas e histórico */
+.bt-notas, .bt-hist { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 8px; }
+.bt-notas li, .bt-hist li { background: #F3F5F7; border-radius: 8px; padding: 8px 10px; overflow-wrap: anywhere; }
+.bt-texto-nota { white-space: pre-wrap; margin: 4px 0 0; }
+.bt-foto-img { display: block; max-width: 100%; max-height: 320px; border-radius: 10px; margin-top: 8px; }
+
+@media (min-width: 640px) {
+  .bt-filtros { grid-template-columns: 2fr 1fr 1fr 1fr; align-items: end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt-aba { transition: none; }
+}
