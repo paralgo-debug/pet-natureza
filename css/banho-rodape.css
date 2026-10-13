@@ -1,0 +1,15 @@
+/* PET NATUREZA - Banho & Tosa - espaço no fim do rodapé para a barra fixa do WhatsApp */
+.bt-pagina .rodape {
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+}
+.bt-pagina .rodape ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bt-pagina .rodape li a,
+.bt-pagina .rodape p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
