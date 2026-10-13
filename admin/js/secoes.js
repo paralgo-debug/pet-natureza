@@ -1,4 +1,3 @@
-
 import { esc } from './util.js';
 
 export const SECOES = [
@@ -8,7 +7,7 @@ export const SECOES = [
     resumo: 'Cadastro de produtos e categorias, imagens, estoque, promoções, destaques e histórico de ajustes.' },
   { id: 'entrega', rotulo: 'Entrega e Retirada', icone: '🚚', afeta: 'Loja',
     resumo: 'Locais de entrega, taxas, disponibilidade, retirada na loja e prazos estimados.' },
-  { id: 'banho-tosa', rotulo: 'Banho & Tosa', icone: '🛁', afeta: 'Banho & Tosa',
+  { id: 'banho-tosa', rotulo: 'Banho & Tosa', icone: '🛁', pronto: true, afeta: 'Banho & Tosa',
     resumo: 'Datas e horários, capacidade, bloqueios, regras de preço e solicitações com status e contato por WhatsApp.' },
   { id: 'veterinaria', rotulo: 'Consultas Veterinárias', icone: '🩺', afeta: 'Consulta Veterinária',
     resumo: 'Agenda própria, tipos de consulta, preços, aviso de emergência e solicitações com status.' },
