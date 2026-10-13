@@ -1,0 +1,35 @@
+/* PET NATUREZA - Banho & Tosa - painel: aba Serviços e preços (visual neutro) */
+
+.bp-fs { border: 0; padding: 0; margin: 0; min-width: 0; }
+.bp-fs legend { font-weight: 800; padding: 0; margin-bottom: 6px; }
+.bp-info { margin: 0 0 12px; }
+.bp-info p { margin: 0 0 4px; }
+
+.bp-sec { margin-bottom: 12px; }
+.bp-sec > summary { cursor: pointer; padding: 12px 14px; min-height: 44px; font-weight: 800; }
+.bp-sec > summary:focus-visible { outline: 3px solid #2F6FDE; outline-offset: 2px; }
+.bp-corpo { padding: 4px 14px 16px; }
+.bp-corpo input[type="text"], .bp-corpo select { width: 100%; min-height: 44px; max-width: 100%; }
+
+.bp-lista { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 10px; }
+.bp-item { background: #F3F5F7; border-radius: 10px; padding: 10px 12px; }
+.bp-item .campo { margin: 0 0 8px; }
+.bp-grade { display: grid; gap: 0 12px; }
+
+.bp-check { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.bp-check input { width: 22px; height: 22px; flex: 0 0 auto; }
+.bp-checks { display: grid; gap: 4px; }
+
+.bp-acoes { margin: 16px 0; }
+.bp-sim-res { margin-top: 12px; padding: 12px; background: #F3F5F7; border-radius: 10px; }
+.bp-sim-res p { margin: 0 0 6px; }
+
+.bp-hist-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bp-hist-lista li {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;
+  background: #F3F5F7; border-radius: 8px; padding: 8px 10px;
+}
+
+@media (min-width: 640px) {
+  .bp-grade { grid-template-columns: 1fr 1fr; }
+}
