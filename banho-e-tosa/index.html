@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <title>Agende o Banho &amp; Tosa do seu pet | Pet Natureza</title>
+  <meta name="description" content="Escolha até 3 opções de data e horário para o banho e tosa do seu pet. A equipe do Pet Natureza retorna pelo WhatsApp para confirmar.">
+  <meta name="theme-color" content="#0C4E64">
+  <link rel="icon" href="../assets/logo-site.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/banho.css">
+  <link rel="stylesheet" href="../css/banho-rodape.css">
+</head>
+<body class="bt-pagina">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cab" id="cabecalho"></header>
+
+  <main class="bt-main" id="conteudo" tabindex="-1">
+    <div class="cont">
+
+      <section class="bt-hero" aria-labelledby="titulo">
+        <h1 id="titulo">Agende o Banho &amp; Tosa do seu pet</h1>
+        <p>Você pode enviar até 3 opções de data e horário, em ordem de preferência. A equipe do Pet Natureza retorna pelo WhatsApp para confirmar o agendamento e o valor.</p>
+      </section>
+
+      <noscript>
+        <p class="bt-erro-geral">Este formulário precisa de JavaScript. Fale conosco pelo <a href="https://wa.me/5598984402286">WhatsApp</a> para agendar.</p>
+      </noscript>
+
+      <div id="bt-aviso-config" class="bt-aviso" role="status" hidden></div>
+      <div id="bt-erro-geral" class="bt-erro-geral" role="alert" tabindex="-1" hidden></div>
+
+      <form id="bt-form" novalidate autocomplete="on">
+        <div class="bt-passos">
+
+          <!-- 1. Datas e horários -->
+          <section class="bt-cartao" id="passo-horarios" aria-labelledby="t-passo1">
+            <h2 id="t-passo1"><span class="bt-num" aria-hidden="true">1</span> Datas e horários</h2>
+            <p class="bt-sub">Toque em um horário para escolher. O primeiro que você escolher é a 1ª opção. Você pode escolher até 3.</p>
+
+            <p id="bt-carregando" class="bt-carregando" role="status">Carregando horários disponíveis…</p>
+
+            <div id="bt-sem-horarios" class="bt-aviso" hidden>
+              <p>No momento não há horários disponíveis para agendamento online. Fale com a gente pelo WhatsApp que combinamos o melhor horário para o seu pet.</p>
+              <p><a id="bt-sem-horarios-zap" class="btn btn-escuro btn-pequeno" href="https://wa.me/5598984402286" target="_blank" rel="noopener">Falar no WhatsApp</a></p>
+            </div>
+
+            <div id="bt-horarios-area" hidden>
+              <p class="bt-sub" id="bt-datas-titulo"><strong>Escolha a data</strong></p>
+              <div id="bt-datas" class="bt-datas" role="group" aria-labelledby="bt-datas-titulo"></div>
+
+              <p class="bt-sub" id="bt-horas-titulo" aria-live="polite"><strong>Escolha o horário</strong></p>
+              <div id="bt-horas" class="bt-horas" role="group" aria-labelledby="bt-horas-titulo"></div>
+
+              <p id="bt-msg-opcoes" class="bt-aviso" role="status" aria-live="polite" hidden></p>
+
+              <div id="bt-opcoes-bloco" hidden>
+                <p class="bt-sub"><strong>Suas opções</strong></p>
+                <ol id="bt-opcoes" class="bt-opcoes-lista" aria-label="Suas opções de data e horário, em ordem de prioridade"></ol>
+              </div>
+            </div>
+            <p class="bt-erro" id="erro-opcoes" role="alert" hidden></p>
+          </section>
+
+          <!-- 2. Seus dados -->
+          <section class="bt-cartao" id="passo-contato" aria-labelledby="t-passo2">
+            <h2 id="t-passo2"><span class="bt-num" aria-hidden="true">2</span> Seus dados</h2>
+            <div class="bt-campo">
+              <label for="f-nome">Nome completo</label>
+              <input type="text" id="f-nome" name="nome" maxlength="100" autocomplete="name" aria-describedby="erro-nome">
+              <p class="bt-erro" id="erro-nome" role="alert" hidden></p>
+            </div>
+            <div class="bt-campo">
+              <label for="f-whatsapp">WhatsApp com DDD</label>
+              <input type="tel" id="f-whatsapp" name="whatsapp" inputmode="tel" maxlength="16" placeholder="(98) 91234-5678" autocomplete="tel-national" aria-describedby="erro-whatsapp">
+              <p class="bt-erro" id="erro-whatsapp" role="alert" hidden></p>
+            </div>
+          </section>
+
+          <!-- 3. Dados do pet -->
+          <section class="bt-cartao" id="passo-pet" aria-labelledby="t-passo3">
+            <h2 id="t-passo3"><span class="bt-num" aria-hidden="true">3</span> Dados do pet</h2>
+
+            <div class="bt-campo">
+              <label for="f-pet-nome">Nome do pet</label>
+              <input type="text" id="f-pet-nome" name="pet_nome" maxlength="60" autocomplete="off" aria-describedby="erro-pet-nome">
+              <p class="bt-erro" id="erro-pet-nome" role="alert" hidden></p>
+            </div>
+
+            <fieldset class="bt-grupo" id="g-especie" aria-describedby="erro-especie">
+              <legend>Espécie</legend>
+              <div class="bt-radios">
+                <label class="bt-radio"><input type="radio" name="especie" value="cachorro"><span>Cachorro</span></label>
+                <label class="bt-radio"><input type="radio" name="especie" value="gato"><span>Gato</span></label>
+                <label class="bt-radio"><input type="radio" name="especie" value="outro"><span>Outro</span></label>
+              </div>
+              <p class="bt-erro" id="erro-especie" role="alert" hidden></p>
+            </fieldset>
+
+            <div class="bt-grade-2">
+              <div class="bt-campo">
+                <label for="f-raca">Raça <span class="bt-dica">(opcional)</span></label>
+                <input type="text" id="f-raca" name="pet_raca" maxlength="60" autocomplete="off" aria-describedby="erro-raca">
+                <p class="bt-erro" id="erro-raca" role="alert" hidden></p>
+              </div>
+              <div class="bt-campo">
+                <label for="f-idade">Idade aproximada <span class="bt-dica">(opcional)</span></label>
+                <input type="text" id="f-idade" name="pet_idade" maxlength="40" placeholder="Ex.: 3 anos" autocomplete="off" aria-describedby="erro-idade">
+                <p class="bt-erro" id="erro-idade" role="alert" hidden></p>
+              </div>
+            </div>
+
+            <div class="bt-campo">
+              <label for="f-peso">Peso aproximado em kg <span class="bt-dica">(opcional, ajuda no valor aproximado)</span></label>
+              <input type="text" id="f-peso" name="peso_kg" inputmode="decimal" maxlength="7" placeholder="Ex.: 8,5" autocomplete="off" aria-describedby="erro-peso">
+              <p class="bt-erro" id="erro-peso" role="alert" hidden></p>
+            </div>
+
+            <fieldset class="bt-grupo" id="g-porte" aria-describedby="erro-porte">
+              <legend>Porte <span class="bt-dica">(ajuda no valor aproximado; se estiver em dúvida, escolha o mais próximo)</span></legend>
+              <div class="bt-radios">
+                <label class="bt-radio"><input type="radio" name="porte" value="mini"><span>Mini</span></label>
+                <label class="bt-radio"><input type="radio" name="porte" value="pequeno"><span>Pequeno</span></label>
+                <label class="bt-radio"><input type="radio" name="porte" value="medio"><span>Médio</span></label>
+                <label class="bt-radio"><input type="radio" name="porte" value="grande"><span>Grande</span></label>
+                <label class="bt-radio"><input type="radio" name="porte" value="gigante"><span>Gigante</span></label>
+              </div>
+              <p class="bt-erro" id="erro-porte" role="alert" hidden></p>
+            </fieldset>
+
+            <fieldset class="bt-grupo" id="g-pelagem" aria-describedby="erro-pelagem">
+              <legend>Pelagem <span class="bt-dica">(ajuda no valor aproximado)</span></legend>
+              <div class="bt-radios">
+                <label class="bt-radio"><input type="radio" name="pelagem" value="curto"><span>Curto</span></label>
+                <label class="bt-radio"><input type="radio" name="pelagem" value="medio"><span>Médio</span></label>
+                <label class="bt-radio"><input type="radio" name="pelagem" value="longo"><span>Longo</span></label>
+                <label class="bt-radio"><input type="radio" name="pelagem" value="cacheado"><span>Cacheado</span></label>
+                <label class="bt-radio"><input type="radio" name="pelagem" value="outro"><span>Outro</span></label>
+              </div>
+              <p class="bt-erro" id="erro-pelagem" role="alert" hidden></p>
+            </fieldset>
+
+            <fieldset class="bt-grupo" id="g-dificil" aria-describedby="erro-dificil">
+              <legend>Seu pet é agressivo ou difícil de manejar?</legend>
+              <div class="bt-radios">
+                <label class="bt-radio"><input type="radio" name="dificil" value="nao" checked><span>Não</span></label>
+                <label class="bt-radio"><input type="radio" name="dificil" value="sim"><span>Sim</span></label>
+              </div>
+              <p class="bt-erro" id="erro-dificil" role="alert" hidden></p>
+            </fieldset>
+
+            <div class="bt-campo" id="bloco-comportamento" hidden>
+              <label for="f-comportamento">Conte como ele se comporta <span class="bt-dica">(opcional)</span></label>
+              <textarea id="f-comportamento" name="pet_comportamento" maxlength="500" aria-describedby="erro-comportamento"></textarea>
+              <p class="bt-erro" id="erro-comportamento" role="alert" hidden></p>
+            </div>
+
+            <fieldset class="bt-grupo" id="g-restricao" aria-describedby="erro-restricao-opcao">
+              <legend>Seu pet tem alguma doença, alergia ou restrição?</legend>
+              <div class="bt-radios">
+                <label class="bt-radio"><input type="radio" name="restricao" value="nao" checked><span>Não</span></label>
+                <label class="bt-radio"><input type="radio" name="restricao" value="sim"><span>Sim</span></label>
+              </div>
+              <p class="bt-erro" id="erro-restricao-opcao" role="alert" hidden></p>
+            </fieldset>
+
+            <div class="bt-campo" id="bloco-restricao" hidden>
+              <label for="f-restricao">Descreva a doença, alergia ou restrição</label>
+              <textarea id="f-restricao" name="pet_restricao" maxlength="500" aria-describedby="erro-restricao"></textarea>
+              <p class="bt-erro" id="erro-restricao" role="alert" hidden></p>
+            </div>
+          </section>
+
+          <!-- 4. Serviços -->
+          <section class="bt-cartao" id="passo-servicos" aria-labelledby="t-passo4">
+            <h2 id="t-passo4"><span class="bt-num" aria-hidden="true">4</span> Serviços</h2>
+            <fieldset class="bt-grupo" id="g-servicos" aria-describedby="erro-servicos">
+              <legend>Escolha pelo menos um serviço</legend>
+              <div id="bt-servicos" class="bt-checks"></div>
+              <p class="bt-erro" id="erro-servicos" role="alert" hidden></p>
+            </fieldset>
+          </section>
+
+          <!-- 5. Observações e foto -->
+          <section class="bt-cartao" id="passo-extras" aria-labelledby="t-passo5">
+            <h2 id="t-passo5"><span class="bt-num" aria-hidden="true">5</span> Observações e foto</h2>
+            <div class="bt-campo">
+              <label for="f-obs">Observações <span class="bt-dica">(opcional)</span></label>
+              <textarea id="f-obs" name="observacoes" maxlength="800" aria-describedby="erro-obs"></textarea>
+              <p class="bt-erro" id="erro-obs" role="alert" hidden></p>
+            </div>
+            <div class="bt-campo">
+              <label for="f-foto">Foto do pet <span class="bt-dica">(opcional, uma foto)</span></label>
+              <input type="file" id="f-foto" name="foto" accept="image/jpeg,image/png,image/webp" aria-describedby="erro-foto">
+              <p class="bt-erro" id="erro-foto" role="alert" hidden></p>
+              <div id="bt-foto-previa" class="bt-foto-previa" hidden>
+                <img id="bt-foto-img" alt="Prévia da foto do pet" width="260" height="260">
+                <div class="bt-foto-acoes">
+                  <button type="button" id="bt-foto-remover" class="btn btn-claro btn-pequeno">Remover foto</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Valor aproximado -->
+          <section class="bt-cartao bt-valor" id="bt-valor" aria-labelledby="t-valor">
+            <h2 id="t-valor">Valor aproximado</h2>
+            <div id="bt-valor-conteudo" aria-live="polite" aria-atomic="true"></div>
+            <p class="bt-valor-aviso">Este é apenas um valor aproximado. O valor final será confirmado pela equipe.</p>
+          </section>
+
+          <!-- Consentimento e envio para revisão -->
+          <section class="bt-cartao" id="passo-final" aria-labelledby="t-final">
+            <h2 id="t-final">Quase lá</h2>
+            <div class="bt-campo">
+              <label class="bt-consent" for="f-consent">
+                <input type="checkbox" id="f-consent" name="consentimento" aria-describedby="erro-consent">
+                <span>Li e concordo com o uso dos meus dados para atendimento deste agendamento, conforme a <a href="../privacidade.html" target="_blank" rel="noopener">Política de Privacidade<span class="sr-only"> (abre em nova aba)</span></a>.</span>
+              </label>
+              <p class="bt-erro" id="erro-consent" role="alert" hidden></p>
+            </div>
+
+            <div class="bt-armadilha" aria-hidden="true">
+              <label for="f-contato-site">Não preencha este campo</label>
+              <input type="text" id="f-contato-site" name="contato_site" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="bt-botoes">
+              <button type="submit" id="bt-revisar" class="btn btn-escuro">Revisar solicitação</button>
+            </div>
+          </section>
+
+        </div>
+      </form>
+
+      <!-- Revisão antes de enviar -->
+      <section id="bt-revisao" class="bt-cartao" aria-labelledby="t-revisao" tabindex="-1" hidden>
+        <h2 id="t-revisao">Revise sua solicitação</h2>
+        <p class="bt-sub">Confira os dados. Ao enviar, a equipe recebe seu pedido e retorna pelo WhatsApp. Enviar não confirma o agendamento.</p>
+        <dl id="bt-revisao-resumo" class="bt-resumo"></dl>
+        <p id="bt-erro-envio" class="bt-erro-geral" role="alert" tabindex="-1" hidden></p>
+        <div class="bt-botoes">
+          <button type="button" id="bt-voltar" class="btn btn-claro">Voltar e editar</button>
+          <button type="button" id="bt-enviar" class="btn btn-escuro">Enviar solicitação de agendamento</button>
+        </div>
+      </section>
+
+      <!-- Sucesso -->
+      <section id="bt-sucesso" class="bt-cartao bt-sucesso" aria-labelledby="t-sucesso" tabindex="-1" hidden>
+        <h2 id="t-sucesso">Solicitação enviada!</h2>
+        <p>Número da solicitação:</p>
+        <p><span id="bt-protocolo" class="bt-protocolo"></span></p>
+        <p id="bt-sucesso-msg">Em breve nós do Pet shop Pet Natureza retornaremos pelo WhatsApp para confirmar o agendamento e o valor do banho &amp; tosa.</p>
+        <p id="bt-sucesso-foto" class="bt-aviso" hidden>Não conseguimos enviar a foto do pet. Se quiser, envie a foto pelo WhatsApp quando a equipe falar com você.</p>
+        <dl id="bt-sucesso-resumo" class="bt-resumo"></dl>
+        <div class="bt-botoes">
+          <a id="bt-sucesso-zap" class="btn btn-escuro" href="https://wa.me/5598984402286" target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+          <a class="btn btn-claro" href="../index.html">Voltar à página inicial</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="rodape escuro" id="rodape"></footer>
+
+  <div class="bt-ajuda-fixa" id="ajuda-fixa">
+    <a id="ajuda-link" href="https://wa.me/5598984402286" target="_blank" rel="noopener">Qualquer dúvida, fale conosco no WhatsApp</a>
+  </div>
+
+  <script type="module" src="../js/banho-layout.js"></script>
+  <script type="module" src="../js/banho.js"></script>
+</body>
+              </html>
