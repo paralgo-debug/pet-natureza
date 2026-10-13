@@ -1,4 +1,4 @@
- 
+import { viewBanho } from './banho.js';
 import { supabase, configurado } from './supabase.js';
 import { $, $$, esc, toast, setStatusPub, traduzirErro } from './util.js';
 import { SECOES, viewPlaceholder, viewAjuda } from './secoes.js';
@@ -173,6 +173,7 @@ async function rotear() {
   try {
     if (secao.id === 'painel') await viewPainel(alvo, ctx);
     else if (secao.id === 'inicio') await viewInicio(alvo, ctx);
+    else if (secao.id === 'banho-tosa') await viewBanho(alvo, ctx);
     else if (FORMULARIOS[secao.id] && !FORMULARIOS[secao.id].custom) await viewConfig(alvo, ctx, secao.id);
     else if (secao.id === 'ajuda') viewAjuda(alvo);
     else viewPlaceholder(alvo, secao);
