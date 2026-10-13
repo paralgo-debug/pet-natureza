@@ -1,0 +1,43 @@
+/* PET NATUREZA - Banho & Tosa - painel: aba Agenda (visual neutro) */
+
+.bt-periodo { display: grid; gap: 10px; margin-bottom: 14px; }
+.bt-periodo h2, .bt-lote summary { font-size: 1.05rem; }
+.bt-periodo-campos { display: grid; gap: 10px; }
+.bt-periodo-campos .campo { margin: 0; }
+
+.bt-faixa { margin: 0 0 14px; }
+.bt-faixa .acoes { margin-top: 10px; }
+
+.bt-dias { display: grid; gap: 12px; }
+.bt-dia { padding: 12px 14px; }
+.bt-dia h3 { font-size: 1.05rem; margin: 0 0 8px; }
+.bt-dia-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+.bt-sem-slots { margin: 0 0 10px; }
+
+.bt-slots { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 8px; }
+.bt-slot { background: #F3F5F7; border-radius: 10px; padding: 10px 12px; }
+.bt-slot-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bt-slot-hora { font-size: 1.2rem; font-weight: 800; }
+.bt-slot-info { margin: 6px 0; overflow-wrap: anywhere; }
+.bt-slot-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bt-slot-vagas { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+.bt-slot-vagas input { width: 76px; min-height: 44px; }
+
+.bt-novo { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+.bt-novo .campo { margin: 0; }
+.bt-novo input { min-height: 44px; }
+
+.bt-lote { margin-bottom: 14px; }
+.bt-lote-corpo { padding: 4px 14px 16px; }
+.bt-dias-sem { border: 0; padding: 0; margin: 0 0 12px; min-width: 0; }
+.bt-dias-sem legend { font-weight: 800; padding: 0; margin-bottom: 6px; }
+.bt-dias-sem-lista { display: flex; flex-wrap: wrap; gap: 8px; }
+.bt-dias-sem-lista label {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  padding: 4px 12px; border: 1px solid #C5CED6; border-radius: 10px; background: #fff;
+}
+.bt-dias-sem-lista input { width: 22px; height: 22px; }
+
+@media (min-width: 640px) {
+  .bt-periodo-campos { grid-template-columns: 1fr 1fr auto; align-items: end; }
+}
