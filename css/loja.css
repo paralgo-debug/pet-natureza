@@ -1,0 +1,118 @@
+/* Pet Natureza - Loja: base, cabeçalho, catálogo, cartões, paginação */
+.lj-pagina { --lj-promo: #B3261E; --lj-borda: #E6DFC2; --lj-cab: 92px; background: var(--creme, #FFFAE6); color: var(--texto, #10323F); }
+.lj-pagina [hidden] { display: none !important; }
+.lj-pagina a:focus-visible, .lj-pagina button:focus-visible, .lj-pagina input:focus-visible,
+.lj-pagina select:focus-visible, .lj-pagina textarea:focus-visible, .lj-pagina summary:focus-visible {
+  outline: 3px solid var(--petroleo, #0C4E64); outline-offset: 2px; }
+.lj-trava { overflow: hidden; }
+
+/* Estrutura */
+.lj-main { padding: calc(var(--lj-cab, 92px) + 16px) 0 56px; min-height: 70vh; }
+.lj-main .cont { min-width: 0; }
+.lj-topo { margin-bottom: 14px; }
+.lj-tit { font-family: 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); margin: 0 0 4px; line-height: 1.15; font-size: clamp(1.6rem, 5vw, 2.3rem); }
+.lj-sub { color: var(--suave, #3F5F6B); margin: 0; }
+.lj-ico { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+
+/* Botões */
+.lj-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px;
+  border: 2px solid var(--agua-escuro, #087F7B); border-radius: 999px; background: var(--agua-escuro, #087F7B); color: #fff;
+  font: 700 1rem/1.2 'Nunito', sans-serif; text-decoration: none; cursor: pointer; transition: background .15s, border-color .15s; }
+.lj-btn:hover { background: var(--petroleo, #0C4E64); border-color: var(--petroleo, #0C4E64); }
+.lj-btn-sec { background: #fff; color: var(--petroleo, #0C4E64); border-color: var(--petroleo, #0C4E64); }
+.lj-btn-sec:hover { background: var(--agua-claro, #E3F6F4); color: var(--petroleo-escuro, #083646); border-color: var(--petroleo, #0C4E64); }
+.lj-btn-amarelo { background: var(--amarelo, #FCCD0B); border-color: var(--amarelo, #FCCD0B); color: var(--petroleo-escuro, #083646); }
+.lj-btn-amarelo:hover { background: var(--amarelo-claro, #FFF1A8); color: var(--petroleo-escuro, #083646); border-color: var(--amarelo, #FCCD0B); }
+.lj-btn-peq { padding: 8px 14px; font-size: .95rem; }
+.lj-btn-bloco { width: 100%; }
+.lj-btn[disabled], .lj-btn[aria-disabled="true"] { opacity: .6; cursor: not-allowed; background: #8CA1A8; border-color: #8CA1A8; color: #fff; }
+
+/* Cabeçalho */
+.lj-cab .cab-interno { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+.lj-cab-acoes { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.lj-busca { flex: 1 1 100%; order: 3; position: relative; display: flex; min-width: 0; }
+.lj-busca input { width: 100%; min-height: 44px; padding: 8px 52px 8px 16px; border: 2px solid #B9C9CD; border-radius: 999px;
+  font: inherit; color: var(--texto, #10323F); background: #fff; box-sizing: border-box; }
+.lj-busca button { position: absolute; right: 0; top: 0; width: 44px; height: 44px; border: 0; border-radius: 50%;
+  background: var(--agua-escuro, #087F7B); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.lj-carrinho-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 44px;
+  padding: 0 14px; border: 0; border-radius: 999px; background: var(--petroleo, #0C4E64); color: #fff; font: 800 1rem 'Nunito', sans-serif; cursor: pointer; }
+.lj-carrinho-btn:hover { background: var(--petroleo-escuro, #083646); }
+.lj-contador { min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--amarelo, #FCCD0B);
+  color: var(--petroleo-escuro, #083646); font-size: .85rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+@media (min-width: 960px) {
+  .lj-busca { flex: 1 1 260px; order: 0; max-width: 420px; margin: 0 8px; }
+  .lj-cab-acoes { margin-left: 0; }
+}
+
+/* Filtros */
+.lj-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 10px; margin: 0 -2px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.lj-chip { flex: 0 0 auto; min-height: 44px; padding: 8px 16px; border: 2px solid var(--petroleo, #0C4E64); border-radius: 999px; background: #fff;
+  color: var(--petroleo, #0C4E64); font: 800 .95rem 'Nunito', sans-serif; cursor: pointer; white-space: nowrap; }
+.lj-chip[aria-pressed="true"] { background: var(--petroleo, #0C4E64); color: #fff; }
+.lj-chip small { font-weight: 700; opacity: .85; margin-left: 4px; }
+.lj-ferramentas { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; margin: 6px 0 12px; }
+.lj-ordem { display: flex; align-items: center; gap: 8px; font-weight: 800; }
+.lj-ordem select { min-height: 44px; padding: 6px 12px; border: 2px solid #B9C9CD; border-radius: 12px; font: inherit; background: #fff; color: var(--texto, #10323F); }
+.lj-check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 800; cursor: pointer; }
+.lj-check input { width: 22px; height: 22px; accent-color: var(--agua-escuro, #087F7B); }
+.lj-resultado-info { color: var(--suave, #3F5F6B); font-weight: 700; margin: 0 0 12px; }
+
+/* Grade e cartões */
+.lj-grade { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 700px) { .lj-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; } }
+@media (min-width: 1000px) { .lj-grade { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.lj-card { display: flex; flex-direction: column; background: #fff; border-radius: var(--raio, 20px); overflow: hidden;
+  box-shadow: var(--sombra, 0 6px 18px rgba(12, 78, 100, .12)); }
+.lj-card-img { display: block; position: relative; aspect-ratio: 1 / 1; background: var(--agua-claro, #E3F6F4); }
+.lj-card-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lj-reserva { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 3.4rem; }
+.lj-selos { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.lj-selo { padding: 3px 10px; border-radius: 999px; font: 800 .72rem 'Nunito', sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.lj-selo-promo { background: var(--lj-promo, #B3261E); color: #fff; }
+.lj-selo-dest { background: var(--amarelo, #FCCD0B); color: var(--petroleo-escuro, #083646); }
+.lj-card-corpo { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; flex: 1; }
+.lj-cat { font-size: .78rem; font-weight: 800; color: var(--agua-escuro, #087F7B); text-transform: uppercase; letter-spacing: .03em; }
+.lj-card-nome { margin: 0; font: 700 1.02rem/1.25 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); overflow-wrap: anywhere; }
+.lj-card-nome a { color: inherit; text-decoration: none; }
+.lj-card-nome a:hover { text-decoration: underline; }
+.lj-preco { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.lj-preco-orig { color: var(--suave, #3F5F6B); font-size: .9rem; }
+.lj-preco-atual { font: 800 1.2rem 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); }
+.lj-preco-promo .lj-preco-atual { color: var(--lj-promo, #B3261E); }
+.lj-estoque { font-size: .85rem; font-weight: 800; margin: 0; }
+.lj-estoque-ok { color: #0B6B3A; }
+.lj-estoque-ultimas { color: #8A4B00; }
+.lj-estoque-esgotado { color: #8A1C14; }
+.lj-card-acoes { display: grid; gap: 8px; margin-top: auto; padding-top: 6px; }
+
+/* Paginação */
+.lj-pag { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.lj-pag-info { margin: 0; color: var(--suave, #3F5F6B); font-weight: 700; }
+.lj-pag-lista { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.lj-pag-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 12px;
+  border: 2px solid var(--petroleo, #0C4E64); border-radius: 12px; background: #fff; color: var(--petroleo, #0C4E64); font: 800 1rem 'Nunito', sans-serif; cursor: pointer; }
+.lj-pag-btn:hover { background: var(--agua-claro, #E3F6F4); }
+.lj-pag-btn[aria-current="page"] { background: var(--petroleo, #0C4E64); color: #fff; }
+.lj-pag-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.lj-pag-reticencias { min-width: 24px; text-align: center; color: var(--suave, #3F5F6B); font-weight: 800; }
+
+/* Estados */
+.lj-esq { border-radius: var(--raio, 20px); min-height: 230px; background: linear-gradient(90deg, #EFE9CF 25%, #F8F3DC 50%, #EFE9CF 75%);
+  background-size: 200% 100%; animation: lj-brilho 1.4s linear infinite; }
+@keyframes lj-brilho { to { background-position: -200% 0; } }
+.lj-caixa { padding: 18px; border-radius: 16px; background: #fff; border: 2px dashed var(--lj-borda, #E6DFC2); text-align: center; }
+.lj-caixa p { margin: 0 0 12px; }
+.lj-aviso { padding: 12px 14px; border-radius: 14px; background: var(--amarelo-claro, #FFF1A8); color: var(--petroleo-escuro, #083646); font-weight: 700; }
+.lj-erro { padding: 12px 14px; border-radius: 14px; background: #FDECEA; border: 2px solid var(--lj-promo, #B3261E); color: #7A1710; font-weight: 700; }
+
+/* Avisos rápidos */
+.lj-toasts { position: fixed; left: 0; right: 0; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 120; display: flex;
+  flex-direction: column; align-items: center; gap: 8px; padding: 0 16px; pointer-events: none; }
+.lj-toast { pointer-events: auto; max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 14px; background: var(--petroleo-escuro, #083646);
+  color: #fff; font-weight: 700; box-shadow: 0 8px 24px rgba(8, 54, 70, .35); }
+.lj-toast-erro { background: #8A1C14; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lj-pagina *, .lj-pagina *::before, .lj-pagina *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+             }
