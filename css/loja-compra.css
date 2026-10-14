@@ -1,0 +1,91 @@
+/* Pet Natureza - Loja: página do produto, galeria, gaveta do carrinho, checkout */
+
+/* Quantidade */
+.lj-qtd { display: inline-flex; align-items: center; border: 2px solid var(--petroleo, #0C4E64); border-radius: 999px; background: #fff; overflow: hidden; }
+.lj-qtd button { width: 44px; height: 44px; border: 0; background: transparent; color: var(--petroleo, #0C4E64); font: 800 1.3rem 'Nunito', sans-serif; cursor: pointer; }
+.lj-qtd button:hover { background: var(--agua-claro, #E3F6F4); }
+.lj-qtd button[disabled] { opacity: .4; cursor: not-allowed; }
+.lj-qtd input { width: 48px; height: 44px; border: 0; background: transparent; text-align: center; font: 800 1rem 'Nunito', sans-serif;
+  color: var(--texto, #10323F); -moz-appearance: textfield; appearance: textfield; }
+.lj-qtd input::-webkit-outer-spin-button, .lj-qtd input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Página do produto */
+.lj-voltar { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-bottom: 8px; font-weight: 800; color: var(--petroleo, #0C4E64); text-decoration: none; }
+.lj-voltar:hover { text-decoration: underline; }
+.lj-prod { display: grid; gap: 22px; }
+@media (min-width: 860px) { .lj-prod { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 36px; align-items: start; } }
+.lj-gal-pal { position: relative; aspect-ratio: 1 / 1; border-radius: var(--raio, 20px); overflow: hidden; background: #fff;
+  box-shadow: var(--sombra, 0 6px 18px rgba(12, 78, 100, .12)); touch-action: pan-y; }
+.lj-gal-pal img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.lj-gal-seta { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); color: var(--petroleo, #0C4E64); font-size: 1.4rem; cursor: pointer; box-shadow: 0 2px 8px rgba(8, 54, 70, .25); }
+.lj-gal-ant { left: 8px; }
+.lj-gal-prox { right: 8px; }
+.lj-gal-cont { position: absolute; bottom: 10px; right: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(8, 54, 70, .88); color: #fff; font-size: .85rem; font-weight: 700; }
+.lj-gal-minis { display: flex; gap: 8px; margin: 10px 0 0; padding: 2px; list-style: none; overflow-x: auto; }
+.lj-mini { flex: 0 0 64px; width: 64px; height: 64px; padding: 0; border: 3px solid transparent; border-radius: 12px; overflow: hidden; background: #fff; cursor: pointer; }
+.lj-mini img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lj-mini[aria-current="true"] { border-color: var(--agua-escuro, #087F7B); }
+.lj-prod-info h1 { margin: 6px 0 8px; font: 800 clamp(1.6rem, 5vw, 2.2rem)/1.15 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); overflow-wrap: anywhere; }
+.lj-prod-preco { margin: 10px 0; }
+.lj-prod-preco .lj-preco-atual { font-size: 1.9rem; }
+.lj-contagem { display: inline-block; margin: 4px 0 8px; padding: 6px 12px; border-radius: 12px; background: #FDECEA; color: #7A1710; font-weight: 800; }
+.lj-desc { white-space: pre-line; line-height: 1.6; overflow-wrap: anywhere; }
+.lj-comprar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+.lj-relacionados { margin-top: 36px; }
+.lj-relacionados h2 { font: 800 1.4rem 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); margin: 0 0 12px; }
+
+/* Gaveta do carrinho */
+.lj-fundo { position: fixed; inset: 0; z-index: 100; background: rgba(8, 54, 70, .55); opacity: 0; transition: opacity .2s; }
+.lj-fundo.aberto { opacity: 1; }
+.lj-gaveta { position: fixed; top: 0; right: 0; bottom: 0; z-index: 101; width: min(440px, 100%); display: flex; flex-direction: column;
+  background: var(--creme, #FFFAE6); box-shadow: -8px 0 28px rgba(8, 54, 70, .3); transform: translateX(100%); transition: transform .25s;
+  padding-top: env(safe-area-inset-top); }
+.lj-gaveta.aberta { transform: none; }
+.lj-gaveta-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 16px; background: var(--petroleo, #0C4E64); color: #fff; }
+.lj-gaveta-cab h2 { margin: 0; font: 800 1.3rem 'Baloo 2', cursive; }
+.lj-fechar { width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .15); color: #fff; font-size: 1.4rem; cursor: pointer; }
+.lj-fechar:hover { background: rgba(255, 255, 255, .28); }
+.lj-gaveta-corpo { flex: 1; overflow-y: auto; padding: 14px 16px; -webkit-overflow-scrolling: touch; }
+.lj-gaveta-rod { padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); background: #fff; border-top: 2px solid var(--lj-borda, #E6DFC2); display: grid; gap: 10px; }
+.lj-avisos { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 8px; }
+.lj-linhas { margin: 0; padding: 0; list-style: none; }
+.lj-linha { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--lj-borda, #E6DFC2); }
+.lj-linha-img { grid-row: span 2; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--agua-claro, #E3F6F4);
+  display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+.lj-linha-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lj-linha-nome { margin: 0; font-weight: 800; color: var(--petroleo, #0C4E64); overflow-wrap: anywhere; }
+.lj-linha-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.lj-linha-sub { font-weight: 800; }
+.lj-linha-rem { min-height: 44px; padding: 0 8px; border: 0; background: transparent; color: #8A1C14; font: 800 .9rem 'Nunito', sans-serif; text-decoration: underline; cursor: pointer; }
+.lj-total-linha { display: flex; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 1.15rem; }
+
+/* Checkout */
+.lj-passos { display: flex; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; font-size: .85rem; font-weight: 800; color: var(--suave, #3F5F6B); }
+.lj-passos li { flex: 1; padding: 6px 0; border-bottom: 4px solid var(--lj-borda, #E6DFC2); }
+.lj-passos li[aria-current="step"] { color: var(--petroleo, #0C4E64); border-bottom-color: var(--agua-escuro, #087F7B); }
+.lj-form { display: grid; gap: 14px; }
+.lj-campo { display: grid; gap: 6px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.lj-campo label, .lj-campo legend { font-weight: 800; padding: 0; }
+.lj-campo input, .lj-campo select, .lj-campo textarea { width: 100%; min-height: 44px; padding: 10px 14px; border: 2px solid #B9C9CD; border-radius: 14px;
+  font: inherit; color: var(--texto, #10323F); background: #fff; box-sizing: border-box; }
+.lj-campo textarea { min-height: 88px; resize: vertical; }
+.lj-campo [aria-invalid="true"] { border-color: var(--lj-promo, #B3261E); }
+.lj-ajuda { font-size: .9rem; color: var(--suave, #3F5F6B); margin: 0; }
+.lj-msg-campo { color: #8A1C14; font-weight: 700; font-size: .9rem; margin: 0; }
+.lj-opcoes { display: grid; gap: 8px; }
+.lj-opcao { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; padding: 12px 14px; border: 2px solid #B9C9CD; border-radius: 14px; background: #fff; cursor: pointer; }
+.lj-opcao:has(input:checked) { border-color: var(--agua-escuro, #087F7B); background: var(--agua-claro, #E3F6F4); }
+.lj-opcao input { width: 22px; height: 22px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--agua-escuro, #087F7B); }
+.lj-opcao small { display: block; color: var(--suave, #3F5F6B); font-weight: 600; }
+.lj-resumo { margin: 0; padding: 14px; background: #fff; border-radius: 16px; border: 2px solid var(--lj-borda, #E6DFC2); }
+.lj-resumo-linha { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; margin: 0; }
+.lj-resumo-linha dt { font-weight: 700; }
+.lj-resumo-linha dd { margin: 0; font-weight: 800; text-align: right; }
+.lj-resumo-total { margin-top: 6px; padding-top: 10px; border-top: 2px solid var(--petroleo, #0C4E64); font-size: 1.15rem; }
+.lj-resumo h3 { margin: 0 0 6px; font: 800 1.05rem 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); }
+.lj-sucesso { text-align: center; padding: 8px 4px; display: grid; gap: 12px; }
+.lj-sucesso .lj-numero { font: 800 1.7rem 'Baloo 2', cursive; color: var(--petroleo, #0C4E64); margin: 0; }
+.lj-sucesso p { margin: 0; }
+.lj-wa-btn { background: #1B7F3A; border-color: #1B7F3A; }
+.lj-wa-btn:hover { background: #14602C; border-color: #14602C; }
