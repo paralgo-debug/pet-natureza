@@ -1,0 +1,82 @@
+/* Pet Natureza - Painel: Loja (visual neutro, prefixo lj-)
+   Classes para as telas da loja: lj-abas, lj-aba, lj-barra, lj-cards, lj-item, lj-item-topo, lj-item-nome,
+   lj-item-meta, lj-item-acoes, lj-mini, lj-tag (+ lj-tag-novo/confirmado/preparo/concluido/cancelado/
+   rascunho/publicado/arquivado/alerta/ok/neutro), lj-grade-form, lj-col-2, lj-linha-check, lj-imgs, lj-img,
+   lj-img-principal, lj-img-acoes, lj-dl, lj-hist, lj-notas, lj-vazio, lj-ordem-btns, lj-acoes-fixas,
+   lj-pag-adm, lj-so-leitor, lj-kpis, lj-kpi, lj-aviso-loja */
+.lj-aba-conteudo, .lj-abas { --lj-borda: #d3dae0; --lj-texto: #1f2933; --lj-suave: #5a6b78; --lj-fundo: #f4f6f8; --lj-foco: #1d4ed8; }
+.lj-aba-conteudo :focus-visible, .lj-abas :focus-visible { outline: 3px solid var(--lj-foco); outline-offset: 2px; }
+.lj-so-leitor { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Abas */
+.lj-abas { display: flex; gap: 6px; overflow-x: auto; margin: 0 0 16px; padding: 0 0 4px; border-bottom: 2px solid var(--lj-borda); }
+.lj-aba { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px 10px 0 0; color: #33495a; font-weight: 700; text-decoration: none; }
+.lj-aba:hover { background: #eaeff3; }
+.lj-aba[aria-current="page"] { background: #33495a; color: #fff; }
+
+/* Barra de busca e filtros */
+.lj-barra { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: flex-end; margin: 0 0 14px; }
+.lj-barra .campo { margin: 0; flex: 1 1 180px; min-width: 0; }
+.lj-barra input, .lj-barra select { width: 100%; min-height: 44px; box-sizing: border-box; }
+.lj-barra .btn { min-height: 44px; }
+
+/* Cartões de lista */
+.lj-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lj-item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; padding: 12px; background: #fff; border: 1px solid var(--lj-borda); border-radius: 12px; }
+.lj-item.sem-mini { grid-template-columns: minmax(0, 1fr); }
+.lj-mini { width: 64px; height: 64px; border-radius: 10px; background: var(--lj-fundo); object-fit: cover; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; overflow: hidden; }
+.lj-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lj-item-topo { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between; }
+.lj-item-nome { margin: 0; font-weight: 800; color: var(--lj-texto); overflow-wrap: anywhere; }
+.lj-item-meta { margin: 2px 0 0; color: var(--lj-suave); font-size: .92rem; overflow-wrap: anywhere; }
+.lj-item-acoes { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.lj-item-acoes .btn, .lj-item-acoes a.btn { min-height: 44px; }
+
+/* Etiquetas */
+.lj-tag { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .8rem; font-weight: 800; line-height: 1.5; background: #e5e7eb; color: #374151; }
+.lj-tag-novo { background: #dbeafe; color: #1e40af; }
+.lj-tag-confirmado { background: #ccfbf1; color: #115e59; }
+.lj-tag-preparo { background: #fef3c7; color: #854d0e; }
+.lj-tag-concluido, .lj-tag-publicado, .lj-tag-ok { background: #dcfce7; color: #166534; }
+.lj-tag-cancelado, .lj-tag-alerta { background: #fee2e2; color: #991b1b; }
+.lj-tag-rascunho, .lj-tag-arquivado, .lj-tag-neutro { background: #e5e7eb; color: #374151; }
+
+/* Formulários */
+.lj-grade-form { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .lj-grade-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lj-col-2 { grid-column: 1 / -1; } }
+.lj-grade-form .campo { margin: 0; min-width: 0; }
+.lj-grade-form input, .lj-grade-form select, .lj-grade-form textarea { width: 100%; box-sizing: border-box; min-height: 44px; }
+.lj-grade-form textarea { min-height: 96px; }
+.lj-linha-check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 700; cursor: pointer; }
+.lj-linha-check input { width: 22px; height: 22px; flex: 0 0 auto; }
+.lj-acoes-fixas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--lj-borda); }
+.lj-acoes-fixas .btn { min-height: 44px; }
+.lj-aviso-loja { padding: 10px 14px; border-radius: 10px; background: #fef3c7; color: #5b3a05; font-weight: 700; margin: 0 0 12px; }
+
+/* Imagens do produto */
+.lj-imgs { list-style: none; margin: 12px 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.lj-img { display: grid; gap: 8px; padding: 10px; background: #fff; border: 2px solid var(--lj-borda); border-radius: 12px; }
+.lj-img-principal { border-color: #33495a; }
+.lj-img img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; background: var(--lj-fundo); display: block; }
+.lj-img .campo { margin: 0; }
+.lj-img .campo input { width: 100%; box-sizing: border-box; min-height: 44px; }
+.lj-img-acoes { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.lj-img-acoes .btn { min-height: 44px; min-width: 44px; }
+
+/* Detalhes (pedido) e histórico */
+.lj-dl { display: grid; grid-template-columns: minmax(110px, 30%) minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.lj-dl dt { font-weight: 700; color: var(--lj-suave); }
+.lj-dl dd { margin: 0; overflow-wrap: anywhere; }
+.lj-hist, .lj-notas { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.lj-hist li, .lj-notas li { padding: 8px 12px; background: var(--lj-fundo); border-radius: 10px; overflow-wrap: anywhere; }
+.lj-hist small, .lj-notas small { display: block; color: var(--lj-suave); }
+
+/* Vazio, ordem, paginação, indicadores */
+.lj-vazio { padding: 18px; text-align: center; color: var(--lj-suave); background: #fff; border: 2px dashed var(--lj-borda); border-radius: 12px; }
+.lj-ordem-btns { display: inline-flex; gap: 6px; }
+.lj-ordem-btns .btn { min-width: 44px; min-height: 44px; }
+.lj-pag-adm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-top: 14px; }
+.lj-pag-adm .btn { min-height: 44px; }
+.lj-kpis { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 0 0 14px; }
+.lj-kpi { padding: 12px; background: #fff; border: 1px solid var(--lj-borda); border-radius: 12px; }
+.lj-kpi strong { display: block; font-size: 1.5rem; color: var(--lj-texto); }
