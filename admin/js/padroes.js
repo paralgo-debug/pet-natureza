@@ -9,7 +9,7 @@
  */
 export const MODULOS = {
   loja: {
-    href: 'loja/', pronto: false,
+    href: 'loja/', pronto: true,
     aviso: 'Loja online em breve',
     zap: 'Olá! Gostaria de ver os produtos do Pet Natureza.',
   },
@@ -117,4 +117,4 @@ export function mesclar(padrao, salvo) {
   const r = { ...padrao };
   for (const k of Object.keys(salvo)) r[k] = k in padrao ? mesclar(padrao[k], salvo[k]) : salvo[k];
   return r;
-                                                                   }
+     }
