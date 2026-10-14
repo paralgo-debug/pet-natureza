@@ -135,10 +135,6 @@ export function montarLayout(opc = {}) {
   const btnCarrinho = document.getElementById('lj-btn-carrinho');
   const contador = document.getElementById('lj-contador');
 
-  const fundo = document.createElement('div');
-  fundo.className = 'fundo-menu';
-  cab.insertAdjacentElement('afterend', fundo);
-
   // altura do cabeçalho -> espaço no topo da página
   const ajustarAltura = () => {
     document.body.style.setProperty('--lj-cab', `${Math.ceil(cab.getBoundingClientRect().height)}px`);
@@ -147,14 +143,13 @@ export function montarLayout(opc = {}) {
   if ('ResizeObserver' in window) new ResizeObserver(ajustarAltura).observe(cab);
   else window.addEventListener('resize', ajustarAltura);
 
-  // menu hambúrguer
+  // menu hambúrguer (sem camada escura de fundo)
   const mq = window.matchMedia('(min-width: 960px)');
   const menuAberto = () => menu.classList.contains('aberto');
   const sincronizarInert = () => { menu.inert = !mq.matches && !menuAberto(); };
 
   function abrirMenu() {
     menu.classList.add('aberto');
-    fundo.classList.add('aberto');
     btnMenu.setAttribute('aria-expanded', 'true');
     sincronizarInert();
     btnFechar.focus();
@@ -163,7 +158,6 @@ export function montarLayout(opc = {}) {
   function fecharMenu(devolverFoco) {
     const estavaAberto = menuAberto();
     menu.classList.remove('aberto');
-    fundo.classList.remove('aberto');
     btnMenu.setAttribute('aria-expanded', 'false');
     sincronizarInert();
     if (estavaAberto && devolverFoco) btnMenu.focus();
@@ -171,9 +165,11 @@ export function montarLayout(opc = {}) {
 
   btnMenu.addEventListener('click', () => (menuAberto() ? fecharMenu(true) : abrirMenu()));
   btnFechar.addEventListener('click', () => fecharMenu(true));
-  fundo.addEventListener('click', () => fecharMenu(true));
   menu.addEventListener('click', (ev) => {
     if (ev.target.closest('a')) fecharMenu(false);
+  });
+  document.addEventListener('click', (ev) => {
+    if (menuAberto() && !menu.contains(ev.target) && !btnMenu.contains(ev.target)) fecharMenu(false);
   });
   document.addEventListener('keydown', (ev) => {
     if (ev.key === 'Escape' && menuAberto()) fecharMenu(true);
@@ -243,4 +239,4 @@ export function montarLayout(opc = {}) {
       ultimoTermo = t.trim();
     }
   };
-        }
+           }
