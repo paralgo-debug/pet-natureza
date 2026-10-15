@@ -9,6 +9,7 @@ import {
 
 const IDS_FUNDO = ['lj-cab', 'lj-main', 'lj-rodape'];
 const FOCAVEIS = 'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]), select:not([disabled])';
+const SEGUNDOS_WHATSAPP = 4;
 
 // ctx: { empresa(), linkProduto(slug), abrirProduto(slug) }
 export function criarGaveta(ctx) {
@@ -26,6 +27,7 @@ export function criarGaveta(ctx) {
   let erroEnvio = '';
   let abridor = null;
   let seq = 0;
+  let temporizador = null;
 
   const fundo = document.createElement('div');
   fundo.className = 'lj-fundo';
@@ -49,6 +51,10 @@ export function criarGaveta(ctx) {
 
   const empresa = () => ctx.empresa() || {};
   const wa = () => linkWhatsApp(empresa().whatsapp, 'Olá! Preciso de ajuda com meu pedido na loja do site.');
+
+  function pararRedirecionamento() {
+    if (temporizador) { clearInterval(temporizador); temporizador = null; }
+  }
 
   function pintar(tit, htmlCorpo, htmlRod, manter) {
     titulo.textContent = tit;
@@ -305,14 +311,29 @@ export function criarGaveta(ctx) {
       <p class="lj-numero">${esc(r.numero)}</p>
       <p><strong>Obrigado${nome ? `, ${esc(nome)}` : ''}!</strong></p>
       <p>Seu pedido já foi registrado. Abrir o WhatsApp é um passo separado: ele não paga o pedido nem garante que a mensagem foi entregue.</p>
+      <p role="status">Vamos abrir o WhatsApp da loja com o resumo do pedido já escrito. É só tocar em enviar.</p>
+      <p class="lj-aviso" id="lj-wa-contagem" aria-hidden="true">Abrindo o WhatsApp em ${SEGUNDOS_WHATSAPP}…</p>
       <div class="lj-resumo"><dl>${itens}
         ${l('Subtotal', esc(brl(r.subtotal)))}
         ${r.tipo_entrega === 'entrega' ? l('Taxa de entrega', esc(textoTaxa(r.taxa_entrega))) : ''}
         ${l('Total', esc(brl(r.total)), 'lj-resumo-total')}
         ${l('Recebimento', r.tipo_entrega === 'entrega' ? 'Entrega' : 'Retirada na loja')}
         ${l('Pagamento', esc(r.forma_pagamento_nome))}</dl></div>
-      <a class="lj-btn lj-wa-btn lj-btn-bloco" href="${esc(link)}" target="_blank" rel="noopener">Abrir WhatsApp com o resumo do pedido</a>
+      <a class="lj-btn lj-wa-btn lj-btn-bloco" data-wa href="${esc(link)}" target="_blank" rel="noopener">Abrir WhatsApp com o resumo do pedido</a>
     </div>`, '<button type="button" class="lj-btn lj-btn-sec lj-btn-bloco" data-fechar>Continuar comprando</button>');
+
+    pararRedirecionamento();
+    let restante = SEGUNDOS_WHATSAPP;
+    temporizador = setInterval(() => {
+      restante -= 1;
+      if (restante <= 0) {
+        pararRedirecionamento();
+        window.location.assign(link);
+        return;
+      }
+      const el = corpo.querySelector('#lj-wa-contagem');
+      if (el) el.textContent = `Abrindo o WhatsApp em ${restante}…`;
+    }, 1000);
   }
 
   // ---------- Abrir e fechar ----------
@@ -325,6 +346,7 @@ export function criarGaveta(ctx) {
   function abrir(botao) {
     if (aberta) return;
     aberta = true;
+    pararRedirecionamento();
     abridor = botao || document.activeElement;
     fundo.hidden = false;
     gaveta.hidden = false;
@@ -337,6 +359,7 @@ export function criarGaveta(ctx) {
   }
 
   function fechar(devolverFoco = true) {
+    pararRedirecionamento();
     if (!aberta || enviando) return;
     aberta = false;
     seq += 1;
@@ -363,7 +386,7 @@ export function criarGaveta(ctx) {
   });
 
   gaveta.addEventListener('click', (ev) => {
-    const t = ev.target.closest('[data-fechar],[data-menos],[data-mais],[data-remover],[data-ir],[data-enviar],[data-tentar],a[data-slug]');
+    const t = ev.target.closest('[data-fechar],[data-menos],[data-mais],[data-remover],[data-ir],[data-enviar],[data-tentar],[data-wa],a[data-slug]');
     if (!t || !gaveta.contains(t)) return;
     if (t.matches('a[data-slug]')) {
       if (ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
@@ -372,6 +395,7 @@ export function criarGaveta(ctx) {
       ctx.abrirProduto(t.dataset.slug);
       return;
     }
+    if (t.hasAttribute('data-wa')) { pararRedirecionamento(); return; }
     if (t.hasAttribute('data-fechar')) { fechar(true); return; }
     if (t.hasAttribute('data-enviar')) { enviar(); return; }
     if (t.hasAttribute('data-tentar')) {
@@ -434,4 +458,4 @@ export function criarGaveta(ctx) {
   });
 
   return { abrir, fechar };
-    }
+}
