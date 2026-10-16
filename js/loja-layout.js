@@ -47,6 +47,7 @@ function htmlCabecalho(whats) {
       <button type="button" class="menu-fechar" id="lj-menu-fechar" aria-label="Fechar menu">&times;</button>
       <a href="../index.html#topo">Início</a>
       <a href="./" aria-current="page">Produtos</a>
+      <a href="../consulta-veterinaria/">Consultas Veterinárias</a>
       <a href="../index.html#sobre">Sobre</a>
       <a href="../index.html#contato">Contato</a>
       <a class="btn btn-amarelo btn-pequeno" id="lj-wa-cab" href="${esc(linkWhatsApp(whats, MSG_WA))}" target="_blank" rel="noopener">WhatsApp</a>
@@ -95,6 +96,7 @@ function htmlRodape(emp, redes) {
       <ul>
         <li><a href="../index.html#topo">Início</a></li>
         <li><a href="./">Produtos</a></li>
+        <li><a href="../consulta-veterinaria/">Consultas Veterinárias</a></li>
         <li><a href="../index.html#sobre">Sobre</a></li>
         <li><a href="../index.html#contato">Contato</a></li>
       </ul>
@@ -239,4 +241,4 @@ export function montarLayout(opc = {}) {
       ultimoTermo = t.trim();
     }
   };
-           }
+        }
