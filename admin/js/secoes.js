@@ -9,7 +9,7 @@ export const SECOES = [
     resumo: 'Locais de entrega, taxas, disponibilidade, retirada na loja e prazos estimados.' },
   { id: 'banho-tosa', rotulo: 'Banho & Tosa', icone: '🛁', pronto: true, afeta: 'Banho & Tosa',
     resumo: 'Datas e horários, capacidade, bloqueios, regras de preço e solicitações com status e contato por WhatsApp.' },
-  { id: 'veterinaria', rotulo: 'Consultas Veterinárias', icone: '🩺', afeta: 'Consulta Veterinária',
+  { id: 'veterinaria', rotulo: 'Consultas Veterinárias', icone: '🩺', pronto: true, afeta: 'Consulta Veterinária',
     resumo: 'Agenda própria, tipos de consulta, preços, aviso de emergência e solicitações com status.' },
   { id: 'agenda', rotulo: 'Agenda', icone: '📅', afeta: 'Banho & Tosa e Consulta Veterinária',
     resumo: 'Calendário com horários livres, solicitados, confirmados e bloqueados.' },
@@ -71,4 +71,4 @@ export function viewAjuda(alvo) {
       <summary>Cópia de segurança</summary>
       <p>Os dados ficam no banco do Supabase. Confira no seu plano do Supabase como são feitos os backups e exporte o banco periodicamente. O passo a passo está no arquivo README do projeto.</p>
     </details>`;
-}
+  }
