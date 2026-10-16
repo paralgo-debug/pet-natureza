@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Consulta veterinária | Pet Natureza</title>
+  <meta name="description" content="Solicite a consulta veterinária do seu pet no Pet Natureza. Escolha até 3 opções de data e horário e a equipe retorna pelo WhatsApp.">
+  <meta name="theme-color" content="#0C4E64">
+  <link rel="icon" href="../assets/logo-site.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/vet.css">
+</head>
+<body class="vt-com-barra" id="topo">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cab" id="cab"></header>
+
+  <main id="conteudo" class="vt-pagina" tabindex="-1">
+    <div class="cont">
+
+      <h1>Agende a consulta veterinária do seu pet</h1>
+      <p class="vt-intro">Escolha até 3 opções de data e horário, em ordem de preferência. A equipe retorna pelo WhatsApp para confirmar o agendamento e o valor da consulta.</p>
+
+      <div class="vt-avisos">
+        <section class="vt-aviso vt-aviso-emergencia" id="vt-aviso-emerg" aria-labelledby="t-emerg">
+          <p><strong id="t-emerg">Emergência? Não espere o formulário.</strong></p>
+          <p id="vt-aviso-texto">Em caso de emergência (por exemplo: dificuldade para respirar, convulsão, sangramento intenso, trauma grave, suspeita de envenenamento ou desmaio), não espere o retorno deste formulário. Chame a equipe agora pelo WhatsApp ou procure imediatamente um atendimento veterinário de emergência.</p>
+          <p><a class="btn btn-escuro" href="https://wa.me/5598984402286" data-zap data-zap-msg="Olá! Preciso de ajuda com uma emergência com meu pet." target="_blank" rel="noopener">Chamar agora no WhatsApp</a></p>
+        </section>
+        <div class="vt-aviso vt-aviso-info">
+          <p>Esta é uma solicitação de consulta, não um agendamento confirmado.</p>
+          <p>As informações enviadas não substituem o exame clínico feito pelo veterinário.</p>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="vt-aviso vt-aviso-info">
+          <p>Para solicitar a consulta por aqui, ative o JavaScript do navegador. Se preferir, fale conosco pelo WhatsApp.</p>
+          <p><a class="btn btn-escuro" href="https://wa.me/5598984402286" target="_blank" rel="noopener">Falar pelo WhatsApp</a></p>
+        </div>
+      </noscript>
+
+      <div id="vt-carregando" class="carregando" role="status">Carregando o agendamento…</div>
+
+      <div class="vt-aviso vt-aviso-info" id="vt-erro-carga" role="alert" hidden>
+        <p>Não foi possível carregar o agendamento agora. Fale conosco pelo WhatsApp ou tente novamente em instantes.</p>
+        <p><a class="btn btn-escuro" href="https://wa.me/5598984402286" data-zap target="_blank" rel="noopener">Falar pelo WhatsApp</a></p>
+      </div>
+
+      <form id="vt-form" novalidate autocomplete="on" hidden>
+        <div class="vt-passos">
+
+          <!-- 1. Motivo -->
+          <section class="vt-cartao" aria-labelledby="t-motivo">
+            <h2 class="vt-cartao-titulo" id="t-motivo"><span class="vt-num" aria-hidden="true">1</span>Motivo da consulta</h2>
+            <fieldset class="vt-grupo">
+              <legend class="sr-only">Escolha o motivo da consulta</legend>
+              <div class="vt-tipos" id="vt-tipos-lista"></div>
+            </fieldset>
+            <p class="vt-erro" id="erro-tipo" role="alert" hidden></p>
+            <div class="vt-aviso vt-aviso-emergencia vt-aviso-amplo" id="vt-aviso-urgencia" role="alert" hidden>
+              <p><strong>Atenção: este motivo é de emergência ou urgência.</strong></p>
+              <p id="vt-aviso-urgencia-texto">Em caso de emergência (por exemplo: dificuldade para respirar, convulsão, sangramento intenso, trauma grave, suspeita de envenenamento ou desmaio), não espere o retorno deste formulário. Chame a equipe agora pelo WhatsApp ou procure imediatamente um atendimento veterinário de emergência.</p>
+              <p id="vt-urgencia-bloqueada" hidden><strong>Em caso de emergência, chame a equipe agora pelo WhatsApp.</strong> Este motivo não pode ser enviado pelo formulário.</p>
+              <p><a class="btn btn-escuro" id="vt-zap-urgencia" href="https://wa.me/5598984402286" data-zap data-zap-msg="Olá! Preciso de ajuda com uma emergência com meu pet." target="_blank" rel="noopener">Chamar agora no WhatsApp</a></p>
+            </div>
+          </section>
+
+          <!-- 2. Datas e horários -->
+          <section class="vt-cartao" id="passo-horarios" aria-labelledby="t-horarios">
+            <h2 class="vt-cartao-titulo" id="t-horarios"><span class="vt-num" aria-hidden="true">2</span>Datas e horários</h2>
+            <p class="vt-ajuda">Escolha de 1 a 3 combinações de data e horário, em ordem de preferência. A 1ª opção é a que você mais prefere.</p>
+            <p class="vt-ajuda" id="vt-horarios-status" aria-live="polite"></p>
+            <ul class="vt-datas" id="vt-datas" aria-label="Datas disponíveis"></ul>
+            <ul class="vt-horarios" id="vt-horarios" aria-label="Horários da data escolhida"></ul>
+            <div class="vt-vazio" id="vt-sem-horarios" hidden>
+              <p>Ainda não há horários disponíveis para este motivo. Fale conosco pelo WhatsApp que a equipe combina com você.</p>
+              <p><a class="btn btn-escuro" id="vt-zap-sem-horarios" href="https://wa.me/5598984402286" data-zap data-zap-msg="Olá! Gostaria de agendar uma consulta veterinária." target="_blank" rel="noopener">Falar pelo WhatsApp</a></p>
+            </div>
+            <h3 id="t-opcoes">Suas opções</h3>
+            <p class="vt-ajuda" id="vt-opcoes-vazio">Nenhuma opção escolhida ainda.</p>
+            <ol class="vt-opcoes-lista" id="vt-opcoes" aria-labelledby="t-opcoes"></ol>
+            <p class="vt-erro" id="erro-opcoes" role="alert" hidden></p>
+          </section>
+
+          <!-- 3. Dados do tutor -->
+          <section class="vt-cartao" aria-labelledby="t-tutor">
+            <h2 class="vt-cartao-titulo" id="t-tutor"><span class="vt-num" aria-hidden="true">3</span>Seus dados</h2>
+            <div class="vt-grade">
+              <div class="vt-campo">
+                <label for="f-nome">Nome completo</label>
+                <input type="text" id="f-nome" name="nome" autocomplete="name" maxlength="100" aria-required="true" aria-describedby="erro-nome">
+                <p class="vt-erro" id="erro-nome" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-whatsapp">WhatsApp com DDD</label>
+                <input type="tel" id="f-whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel-national" maxlength="16" placeholder="(98) 91234-5678" aria-required="true" aria-describedby="ajuda-whatsapp erro-whatsapp">
+                <p class="vt-ajuda" id="ajuda-whatsapp">É por este número que a equipe vai retornar.</p>
+                <p class="vt-erro" id="erro-whatsapp" role="alert" hidden></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Dados do pet -->
+          <section class="vt-cartao" aria-labelledby="t-pet">
+            <h2 class="vt-cartao-titulo" id="t-pet"><span class="vt-num" aria-hidden="true">4</span>Dados do pet</h2>
+            <div class="vt-grade">
+              <div class="vt-campo">
+                <label for="f-pet-nome">Nome do pet</label>
+                <input type="text" id="f-pet-nome" name="pet_nome" autocomplete="off" maxlength="60" aria-required="true" aria-describedby="erro-pet_nome">
+                <p class="vt-erro" id="erro-pet_nome" role="alert" hidden></p>
+              </div>
+              <fieldset class="vt-grupo">
+                <legend>Espécie</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" id="f-pet-especie" name="pet_especie" value="cachorro"><span>Cachorro</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_especie" value="gato"><span>Gato</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_especie" value="outro"><span>Outro</span></label>
+                </div>
+                <p class="vt-erro" id="erro-pet_especie" role="alert" hidden></p>
+              </fieldset>
+              <div class="vt-campo">
+                <label for="f-pet-raca">Raça (opcional)</label>
+                <input type="text" id="f-pet-raca" name="pet_raca" autocomplete="off" maxlength="60" aria-describedby="ajuda-raca erro-pet_raca">
+                <p class="vt-ajuda" id="ajuda-raca">Se não souber, escreva SRD ou deixe em branco.</p>
+                <p class="vt-erro" id="erro-pet_raca" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-peso">Peso (kg, opcional)</label>
+                <input type="text" id="f-peso" name="peso_kg" inputmode="decimal" autocomplete="off" placeholder="Ex.: 8,5" aria-describedby="ajuda-peso erro-peso_kg">
+                <p class="vt-ajuda" id="ajuda-peso">Pode usar vírgula. Ajuda a calcular o valor aproximado.</p>
+                <p class="vt-erro" id="erro-peso_kg" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-porte">Porte (opcional)</label>
+                <select id="f-porte" name="pet_porte" aria-describedby="erro-pet_porte">
+                  <option value="">Não sei / prefiro não informar</option>
+                  <option value="mini">Mini</option>
+                  <option value="pequeno">Pequeno</option>
+                  <option value="medio">Médio</option>
+                  <option value="grande">Grande</option>
+                  <option value="gigante">Gigante</option>
+                </select>
+                <p class="vt-erro" id="erro-pet_porte" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-idade">Idade aproximada (opcional)</label>
+                <input type="text" id="f-idade" name="pet_idade" autocomplete="off" maxlength="40" placeholder="Ex.: 3 anos e 2 meses" aria-describedby="erro-pet_idade">
+                <p class="vt-erro" id="erro-pet_idade" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-nascimento">Data de nascimento (opcional)</label>
+                <input type="date" id="f-nascimento" name="pet_nascimento" min="1980-01-01" aria-describedby="ajuda-nasc erro-pet_nascimento">
+                <p class="vt-ajuda" id="ajuda-nasc">Preencha se souber. Não é obrigatório.</p>
+                <p class="vt-erro" id="erro-pet_nascimento" role="alert" hidden></p>
+              </div>
+              <fieldset class="vt-grupo">
+                <legend>Sexo</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" name="pet_sexo" value="macho"><span>Macho</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_sexo" value="femea"><span>Fêmea</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_sexo" value="nao_sei" checked><span>Não sei</span></label>
+                </div>
+                <p class="vt-erro" id="erro-pet_sexo" role="alert" hidden></p>
+              </fieldset>
+              <fieldset class="vt-grupo">
+                <legend>Castrado(a)?</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" name="pet_castrado" value="sim"><span>Sim</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_castrado" value="nao"><span>Não</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_castrado" value="nao_sei" checked><span>Não sei</span></label>
+                </div>
+                <p class="vt-erro" id="erro-pet_castrado" role="alert" hidden></p>
+              </fieldset>
+            </div>
+          </section>
+
+          <!-- 5. Detalhes da consulta -->
+          <section class="vt-cartao" aria-labelledby="t-detalhes">
+            <h2 class="vt-cartao-titulo" id="t-detalhes"><span class="vt-num" aria-hidden="true">5</span>Detalhes da consulta</h2>
+            <div class="vt-grade">
+              <div class="vt-campo vt-campo-largo">
+                <label for="f-sintomas">Sintomas ou queixa <span id="f-sintomas-req" hidden>(obrigatório para este motivo)</span></label>
+                <textarea id="f-sintomas" name="sintomas" maxlength="1000" aria-describedby="ajuda-sintomas erro-sintomas"></textarea>
+                <p class="vt-ajuda" id="ajuda-sintomas">Conte o que você notou no seu pet. A avaliação é feita pelo veterinário na consulta.</p>
+                <p class="vt-erro" id="erro-sintomas" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo">
+                <label for="f-duracao">Há quanto tempo? (opcional)</label>
+                <select id="f-duracao" name="sintomas_duracao" aria-describedby="erro-sintomas_duracao">
+                  <option value="">Selecione</option>
+                  <option value="hoje">Começou hoje</option>
+                  <option value="1_3_dias">De 1 a 3 dias</option>
+                  <option value="4_7_dias">De 4 a 7 dias</option>
+                  <option value="mais_1_semana">Mais de 1 semana</option>
+                  <option value="mais_1_mes">Mais de 1 mês</option>
+                  <option value="nao_sei">Não sei informar</option>
+                </select>
+                <p class="vt-erro" id="erro-sintomas_duracao" role="alert" hidden></p>
+              </div>
+              <fieldset class="vt-grupo">
+                <legend>O pet está em tratamento ou usando alguma medicação?</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" name="em_tratamento" value="nao" checked><span>Não</span></label>
+                  <label class="vt-pilula"><input type="radio" name="em_tratamento" value="sim"><span>Sim</span></label>
+                </div>
+                <p class="vt-erro" id="erro-em_tratamento" role="alert" hidden></p>
+              </fieldset>
+              <div class="vt-campo vt-campo-largo" id="bloco-medicacao" hidden>
+                <label for="f-medicacao">Qual tratamento ou medicação?</label>
+                <textarea id="f-medicacao" name="medicacao" maxlength="500" aria-describedby="erro-medicacao"></textarea>
+                <p class="vt-erro" id="erro-medicacao" role="alert" hidden></p>
+              </div>
+              <fieldset class="vt-grupo">
+                <legend>O pet tem doenças crônicas, alergias ou restrições?</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" name="tem_condicoes" value="nao" checked><span>Não</span></label>
+                  <label class="vt-pilula"><input type="radio" name="tem_condicoes" value="sim"><span>Sim</span></label>
+                </div>
+                <p class="vt-erro" id="erro-tem_condicoes" role="alert" hidden></p>
+              </fieldset>
+              <div class="vt-campo vt-campo-largo" id="bloco-condicoes" hidden>
+                <label for="f-condicoes">Quais doenças, alergias ou restrições?</label>
+                <textarea id="f-condicoes" name="condicoes" maxlength="500" aria-describedby="erro-condicoes"></textarea>
+                <p class="vt-erro" id="erro-condicoes" role="alert" hidden></p>
+              </div>
+              <fieldset class="vt-grupo">
+                <legend>O pet costuma ser agressivo ou difícil de manusear?</legend>
+                <div class="vt-pilulas">
+                  <label class="vt-pilula"><input type="radio" name="pet_dificil" value="nao" checked><span>Não</span></label>
+                  <label class="vt-pilula"><input type="radio" name="pet_dificil" value="sim"><span>Sim</span></label>
+                </div>
+                <p class="vt-erro" id="erro-pet_dificil" role="alert" hidden></p>
+              </fieldset>
+              <div class="vt-campo vt-campo-largo" id="bloco-comportamento" hidden>
+                <label for="f-comportamento">Conte como ele reage (opcional)</label>
+                <textarea id="f-comportamento" name="pet_comportamento" maxlength="500" aria-describedby="ajuda-comportamento erro-pet_comportamento"></textarea>
+                <p class="vt-ajuda" id="ajuda-comportamento">Isso ajuda a equipe a se preparar.</p>
+                <p class="vt-erro" id="erro-pet_comportamento" role="alert" hidden></p>
+              </div>
+              <div class="vt-campo vt-campo-largo">
+                <label for="f-observacoes">Observações (opcional)</label>
+                <textarea id="f-observacoes" name="observacoes" maxlength="800" aria-describedby="erro-observacoes"></textarea>
+                <p class="vt-erro" id="erro-observacoes" role="alert" hidden></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 6. Fotos -->
+          <section class="vt-cartao" aria-labelledby="t-fotos">
+            <h2 class="vt-cartao-titulo" id="t-fotos"><span class="vt-num" aria-hidden="true">6</span>Fotos (opcional)</h2>
+            <div class="vt-campo">
+              <label for="f-fotos">Adicionar fotos (até 2)</label>
+              <input type="file" id="f-fotos" name="fotos" accept="image/*" multiple aria-describedby="ajuda-fotos">
+              <p class="vt-ajuda" id="ajuda-fotos">Só a equipe do Pet Natureza vê as imagens. Elas são reduzidas no seu aparelho antes de enviar.</p>
+              <p class="vt-ajuda" id="vt-fotos-status" aria-live="polite"></p>
+              <p class="vt-erro" id="erro-fotos" role="alert" hidden></p>
+            </div>
+            <div class="vt-fotos" id="vt-fotos-lista"></div>
+          </section>
+
+        </div>
+
+        <!-- Valor aproximado -->
+        <section class="vt-valor" id="vt-valor-cartao" aria-labelledby="t-valor">
+          <h2 id="t-valor">Valor aproximado</h2>
+          <div id="vt-valor-corpo" aria-live="polite" aria-atomic="true"></div>
+          <p class="vt-valor-aviso">Este é apenas um valor aproximado. O valor final será confirmado pela equipe após a avaliação.</p>
+          <p class="vt-valor-aviso" id="vt-valor-horario" hidden>O valor pode mudar conforme o horário confirmado.</p>
+        </section>
+
+        <div class="vt-consent">
+          <input type="checkbox" id="f-consentimento" name="consentimento" aria-describedby="erro-consentimento">
+          <label for="f-consentimento">Li e concordo que o Pet Natureza use os dados informados, inclusive os dados de saúde do meu pet, para atender esta solicitação, conforme a <a href="../privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+        </div>
+        <p class="vt-erro" id="erro-consentimento" role="alert" hidden></p>
+
+        <div class="vt-honey" aria-hidden="true">
+          <label for="f-contato-site">Não preencha este campo</label>
+          <input type="text" id="f-contato-site" name="contato_site" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="vt-erro-geral" id="vt-erro-geral" role="alert" hidden></p>
+
+        <div class="vt-acoes">
+          <button type="button" class="btn btn-escuro" id="vt-btn-revisar">Revisar solicitação</button>
+        </div>
+      </form>
+
+      <!-- Revisão -->
+      <section class="vt-cartao" id="vt-revisao" aria-labelledby="t-revisao" hidden>
+        <h2 id="t-revisao" tabindex="-1">Revise sua solicitação</h2>
+        <div id="vt-revisao-corpo"></div>
+        <p class="vt-erro-geral" id="vt-erro-envio" role="alert" hidden></p>
+        <div class="vt-acoes">
+          <button type="button" class="btn btn-claro" id="vt-btn-voltar">Voltar e editar</button>
+          <button type="button" class="btn btn-escuro" id="vt-btn-enviar">Enviar solicitação de consulta</button>
+        </div>
+      </section>
+
+      <!-- Sucesso -->
+      <section class="vt-sucesso" id="vt-sucesso" aria-labelledby="t-sucesso" tabindex="-1" hidden>
+        <h2 id="t-sucesso">Solicitação enviada</h2>
+        <div id="vt-sucesso-corpo"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <aside class="vt-barra-zap" aria-label="Contato por WhatsApp">
+    <a id="vt-zap-barra" href="https://wa.me/5598984402286" data-zap target="_blank" rel="noopener">Qualquer dúvida, fale conosco no WhatsApp</a>
+  </aside>
+
+  <footer class="rodape escuro" id="rodape"></footer>
+
+  <script type="module" src="../js/vet-layout.js"></script>
+  <script type="module" src="../js/vet.js"></script>
+</body>
+  </html>
