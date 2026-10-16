@@ -19,7 +19,7 @@ export const MODULOS = {
     zap: 'Olá! Gostaria de agendar Banho & Tosa para o meu pet.',
   },
   vet: {
-    href: 'consulta-veterinaria/', pronto: false,
+    href: 'consulta-veterinaria/', pronto: true,
     aviso: 'Agendamento online em breve',
     zap: 'Olá! Gostaria de agendar uma consulta veterinária para o meu pet.',
   },
@@ -117,4 +117,4 @@ export function mesclar(padrao, salvo) {
   const r = { ...padrao };
   for (const k of Object.keys(salvo)) r[k] = k in padrao ? mesclar(padrao[k], salvo[k]) : salvo[k];
   return r;
-     }
+}
