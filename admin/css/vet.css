@@ -1,0 +1,256 @@
+/* Pet Natureza - Painel: Consulta Veterinária (visual neutro, prefixo vt-) */
+
+.vt-adm {
+  --vt-borda: #cfd8dc;
+  --vt-fundo: #f5f7f8;
+  --vt-texto: #1f2d33;
+  --vt-suave: #546e7a;
+  --vt-azul: #37566b;
+  --vt-azul-claro: #e8eef2;
+  --vt-verm: #b3261e;
+  --vt-verm-claro: #fdecea;
+  --vt-ambar: #6b4700;
+  --vt-ambar-claro: #fff4d6;
+  --vt-verde: #1b6b3a;
+  --vt-verde-claro: #e4f4ea;
+  color: var(--vt-texto);
+}
+.vt-adm [hidden] { display: none !important; }
+.vt-adm .btn { min-height: 44px; }
+.vt-adm a:focus-visible,
+.vt-adm button:focus-visible,
+.vt-adm input:focus-visible,
+.vt-adm select:focus-visible,
+.vt-adm textarea:focus-visible,
+.vt-adm summary:focus-visible {
+  outline: 3px solid var(--vt-azul);
+  outline-offset: 2px;
+}
+.vt-pre-linha { white-space: pre-line; }
+.vt-suave { color: var(--vt-suave); }
+
+/* ---------- Abas ---------- */
+.vt-abas {
+  display: flex;
+  gap: .25rem;
+  overflow-x: auto;
+  border-bottom: 2px solid var(--vt-borda);
+  margin: 0 0 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+.vt-aba {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .5rem 1rem;
+  margin-bottom: -2px;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 3px solid transparent;
+  color: var(--vt-azul);
+  font-weight: 700;
+  text-decoration: none;
+}
+.vt-aba[aria-current="page"] {
+  color: #fff;
+  background: var(--vt-azul);
+  border-bottom-color: var(--vt-azul);
+}
+
+/* ---------- Métricas ---------- */
+.vt-metricas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .6rem;
+  margin: 0 0 1rem;
+}
+.vt-metrica {
+  padding: .6rem .8rem;
+  border: 1px solid var(--vt-borda);
+  border-radius: 12px;
+  background: #fff;
+}
+.vt-metrica-num { display: block; font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+.vt-metrica-rot { display: block; font-size: .85rem; color: var(--vt-suave); }
+.vt-metrica-alerta { border-color: var(--vt-verm); background: var(--vt-verm-claro); }
+.vt-metrica-alerta .vt-metrica-num { color: var(--vt-verm); }
+
+/* ---------- Selos ---------- */
+.vt-selo {
+  display: inline-block;
+  padding: .12rem .6rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 800;
+  background: var(--vt-azul-claro);
+  color: var(--vt-azul);
+}
+.vt-selo-novo { background: #dbe8f5; color: #174a7c; }
+.vt-selo-em_contato { background: var(--vt-ambar-claro); color: var(--vt-ambar); }
+.vt-selo-confirmado { background: var(--vt-verde-claro); color: var(--vt-verde); }
+.vt-selo-cancelado { background: #eceff1; color: #455a64; }
+.vt-selo-realizado { background: var(--vt-azul); color: #fff; }
+.vt-selo-urgente { background: var(--vt-verm); color: #fff; }
+.vt-selo-ok { background: var(--vt-verde-claro); color: var(--vt-verde); }
+.vt-selo-alerta { background: var(--vt-ambar-claro); color: var(--vt-ambar); }
+.vt-selo-cinza { background: #eceff1; color: #455a64; }
+
+/* ---------- Filtros ---------- */
+.vt-filtros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .7rem;
+  margin: 0 0 .75rem;
+}
+.vt-contagem { margin: 0 0 .75rem; color: var(--vt-suave); font-weight: 700; }
+
+/* ---------- Solicitações ---------- */
+.vt-lista { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+details.vt-sol {
+  border: 1px solid var(--vt-borda);
+  border-left: 6px solid var(--vt-azul);
+  border-radius: 12px;
+  background: #fff;
+}
+details.vt-sol.vt-sol-urgente { border-left-color: var(--vt-verm); }
+details.vt-sol > summary {
+  display: grid;
+  gap: .3rem;
+  padding: .8rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  min-height: 44px;
+}
+details.vt-sol > summary::-webkit-details-marker { display: none; }
+.vt-sol-linha { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.vt-sol-titulo { font-weight: 800; }
+.vt-sol-meta { color: var(--vt-suave); font-size: .92rem; }
+.vt-sol-corpo { padding: 0 1rem 1rem; display: grid; gap: .9rem; }
+.vt-sec-titulo { margin: 0 0 .4rem; font-size: 1.02rem; font-weight: 800; color: var(--vt-azul); }
+
+.vt-dl { display: grid; grid-template-columns: 1fr; gap: .15rem .9rem; margin: 0; }
+.vt-dl dt { font-weight: 800; color: var(--vt-azul); }
+.vt-dl dd { margin: 0 0 .5rem; overflow-wrap: anywhere; }
+
+.vt-destaque {
+  padding: .6rem .8rem;
+  border: 2px solid #c58a00;
+  border-radius: 10px;
+  background: var(--vt-ambar-claro);
+  color: var(--vt-ambar);
+  font-weight: 700;
+}
+.vt-opc-lista, .vt-hist-lista, .vt-notas-lista { display: grid; gap: .4rem; margin: 0; padding: 0; list-style: none; }
+.vt-opc-item, .vt-hist-item, .vt-nota-item {
+  padding: .5rem .7rem;
+  border-radius: 10px;
+  background: var(--vt-fundo);
+}
+.vt-opc-final { background: var(--vt-verde-claro); color: var(--vt-verde); font-weight: 800; }
+.vt-status-bloco {
+  display: grid;
+  gap: .7rem;
+  padding: .8rem;
+  border: 1px solid var(--vt-borda);
+  border-radius: 12px;
+  background: var(--vt-fundo);
+}
+.vt-fotos-adm { display: flex; flex-wrap: wrap; gap: .6rem; }
+.vt-fotos-adm img { max-width: 100%; width: 11rem; border-radius: 10px; border: 1px solid var(--vt-borda); }
+.vt-zona-perigo {
+  padding: .8rem;
+  border: 2px solid var(--vt-verm);
+  border-radius: 12px;
+  background: var(--vt-verm-claro);
+}
+
+/* ---------- Avisos e erros ---------- */
+.vt-faixa {
+  margin: 0 0 1rem;
+  padding: .8rem 1rem;
+  border-radius: 12px;
+  border: 2px solid var(--vt-azul);
+  background: var(--vt-azul-claro);
+  font-weight: 700;
+}
+.vt-faixa-pendente { border-color: #c58a00; background: var(--vt-ambar-claro); color: var(--vt-ambar); }
+.vt-faixa-erro { border-color: var(--vt-verm); background: var(--vt-verm-claro); color: #5f1410; white-space: pre-line; }
+.vt-campo-erro { margin: .2rem 0 0; color: var(--vt-verm); font-weight: 700; font-size: .92rem; }
+.vt-adm [aria-invalid="true"] { border-color: var(--vt-verm); background: #fff6f5; }
+.vt-vazio { padding: 1rem; border-radius: 12px; background: var(--vt-fundo); color: var(--vt-suave); font-weight: 700; }
+
+/* ---------- Agenda ---------- */
+.vt-agenda-barra { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .7rem; margin: 0 0 1rem; }
+.vt-dia {
+  margin: 0 0 .9rem;
+  padding: .8rem;
+  border: 1px solid var(--vt-borda);
+  border-radius: 12px;
+  background: #fff;
+}
+.vt-dia-cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin: 0 0 .6rem; }
+.vt-dia-titulo { margin: 0; font-size: 1.05rem; font-weight: 800; }
+.vt-dia-acoes, .vt-slot-acoes { display: flex; flex-wrap: wrap; gap: .4rem; }
+.vt-slot-lista { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.vt-slot-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .8rem;
+  padding: .6rem .7rem;
+  border-radius: 10px;
+  background: var(--vt-fundo);
+}
+.vt-slot-linha-bloq { opacity: .8; background: #eceff1; }
+.vt-slot-hora { font-weight: 800; font-size: 1.05rem; min-width: 3.4rem; }
+.vt-slot-info { flex: 1 1 14rem; display: grid; gap: .2rem; font-size: .92rem; }
+.vt-lote-grade { display: grid; grid-template-columns: 1fr; gap: .8rem; }
+.vt-dias-semana { display: flex; flex-wrap: wrap; gap: .4rem; border: 0; padding: 0; margin: 0; }
+.vt-dias-semana label {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  min-height: 44px;
+  padding: .3rem .8rem;
+  border: 1px solid var(--vt-borda);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+}
+
+/* ---------- Tipos e preços ---------- */
+.vt-grade-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .8rem; }
+.vt-linha-edit {
+  display: grid;
+  gap: .7rem;
+  margin: 0 0 .8rem;
+  padding: .8rem;
+  border: 1px solid var(--vt-borda);
+  border-radius: 12px;
+  background: var(--vt-fundo);
+}
+.vt-linha-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.vt-linha-acoes { display: flex; flex-wrap: wrap; gap: .4rem; }
+.vt-sim {
+  padding: 1rem;
+  border: 2px solid var(--vt-azul);
+  border-radius: 12px;
+  background: var(--vt-azul-claro);
+}
+.vt-sim-total { margin: .3rem 0; font-size: 1.7rem; font-weight: 800; }
+.vt-sim-itens { margin: .4rem 0 0; padding: 0; list-style: none; display: grid; gap: .2rem; }
+.vt-sim-itens li { display: flex; justify-content: space-between; gap: 1rem; }
+
+@media (min-width: 640px) {
+  .vt-metricas { grid-template-columns: repeat(4, 1fr); }
+  .vt-filtros { grid-template-columns: repeat(2, 1fr); }
+  .vt-dl { grid-template-columns: 12rem 1fr; }
+  .vt-dl dd { margin: 0; }
+  .vt-lote-grade { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  .vt-filtros { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vt-adm * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    }
