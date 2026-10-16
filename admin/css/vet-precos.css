@@ -1,0 +1,21 @@
+/* Pet Natureza - Painel: aba Tipos e preços (complemento de vet.css) */
+
+.vt-adm .vt-fs { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+.vt-adm .vt-pr-status { margin: 0 0 .75rem; font-weight: 700; }
+
+.vt-adm .vt-rev-lista { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.vt-adm .vt-rev-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .6rem .8rem;
+  border-radius: 10px;
+  background: var(--vt-fundo);
+}
+
+.vt-adm .vt-linha-edit .campo input[type="checkbox"] { margin-right: .4rem; }
+.vt-adm .vt-linha-edit .campo label { display: block; }
+.vt-adm .vt-sim-aviso { margin: .5rem 0 0; font-weight: 700; }
