@@ -177,6 +177,7 @@ async function rotear() {
     else if (secao.id === 'produtos') await (await import('./loja.js')).viewLoja(alvo, ctx);
     else if (secao.id === 'entrega') await (await import('./loja-entrega.js')).viewEntrega(alvo, ctx);
     else if (secao.id === 'pagamentos') await (await import('./loja-pagamentos.js')).viewPagamentos(alvo, ctx);
+    else if (secao.id === 'veterinaria') await (await import('./vet.js')).viewVeterinaria(alvo, ctx);
     else if (FORMULARIOS[secao.id] && !FORMULARIOS[secao.id].custom) await viewConfig(alvo, ctx, secao.id);
     else if (secao.id === 'ajuda') viewAjuda(alvo);
     else viewPlaceholder(alvo, secao);
