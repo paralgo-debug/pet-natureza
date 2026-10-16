@@ -8,7 +8,7 @@ const MENU = [
   ['Início', '../index.html#topo'],
   ['Produtos', '../index.html#acoes'],
   ['Banho & Tosa', './'],
-  ['Consultas Veterinárias', '../index.html#acoes'],
+  ['Consultas Veterinárias', '../consulta-veterinaria/'],
   ['Sobre Nós', '../index.html#sobre'],
   ['Contato', '../index.html#contato']
 ];
